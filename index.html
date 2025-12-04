@@ -47,29 +47,33 @@
         </div>
     </div>
 
-    <script>
+<script>
   document.addEventListener('DOMContentLoaded', function() {
-    const dotCount = 200;
-    const dots = [];
+    const dotSize = 4;
+    const spacing = 20;
     const repelRadius = 100;
+    const repelStrength = 30;
+    const dots = [];
 
-    // Create dots
-    for (let i = 0; i < dotCount; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('interactive-dot');
-      dot.style.position = 'fixed';
-      dot.style.width = '4px';
-      dot.style.height = '4px';
-      dot.style.backgroundColor = '#333';
-      dot.style.borderRadius = '50%';
-      dot.style.pointerEvents = 'none';
-      dot.style.zIndex = '-1';
-      document.body.appendChild(dot);
-      dots.push(dot);
+    // Create a grid of dots
+    const cols = Math.ceil(window.innerWidth / spacing);
+    const rows = Math.ceil(window.innerHeight / spacing);
 
-      // Random initial position
-      dot.style.left = Math.random() * 100 + 'vw';
-      dot.style.top = Math.random() * 100 + 'vh';
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        const dot = document.createElement('div');
+        dot.classList.add('interactive-dot');
+        dot.style.left = (i * spacing) + 'px';
+        dot.style.top = (j * spacing) + 'px';
+        document.body.appendChild(dot);
+        dots.push({
+          element: dot,
+          x: i * spacing,
+          y: j * spacing,
+          baseX: i * spacing,
+          baseY: j * spacing
+        });
+      }
     }
 
     // Repel dots on mousemove
@@ -78,21 +82,34 @@
       const mouseY = e.clientY;
 
       dots.forEach(dot => {
-        const dotRect = dot.getBoundingClientRect();
-        const dotX = dotRect.left + dotRect.width / 2;
-        const dotY = dotRect.top + dotRect.height / 2;
-        const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
+        const dx = mouseX - dot.x;
+        const dy = mouseY - dot.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < repelRadius) {
-          const angle = Math.atan2(mouseY - dotY, mouseX - dotX);
-          const repelDistance = (repelRadius - distance) / repelRadius * 30;
-          dot.style.left = parseFloat(dot.style.left) - Math.cos(angle) * repelDistance + 'px';
-          dot.style.top = parseFloat(dot.style.top) - Math.sin(angle) * repelDistance + 'px';
+          const angle = Math.atan2(dy, dx);
+          const repelDistance = (1 - distance / repelRadius) * repelStrength;
+          dot.x = dot.baseX - Math.cos(angle) * repelDistance;
+          dot.y = dot.baseY - Math.sin(angle) * repelDistance;
+          dot.element.style.left = dot.x + 'px';
+          dot.element.style.top = dot.y + 'px';
+        } else {
+          // Return to original position
+          dot.x = dot.baseX;
+          dot.y = dot.baseY;
+          dot.element.style.left = dot.x + 'px';
+          dot.element.style.top = dot.y + 'px';
         }
       });
     });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      location.reload();
+    });
   });
 </script>
+
 
 
 
