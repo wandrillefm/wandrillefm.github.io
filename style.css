@@ -70,3 +70,6 @@ body {
    z-index: 0;
 }
     
+html {
+    overflow: hidden;
+}
