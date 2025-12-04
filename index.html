@@ -46,5 +46,43 @@
             <p>LinkedIn: linkedin.com/in/yourprofile</p>
         </div>
     </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dotsContainer = document.createElement('div');
+    dotsContainer.classList.add('dots');
+    document.body.appendChild(dotsContainer);
+
+    const dotCount = 50;
+    const dots = [];
+
+    for (let i = 0; i < dotCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      dotsContainer.appendChild(dot);
+      dots.push(dot);
+    }
+
+    document.addEventListener('mousemove', function(e) {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+
+      dots.forEach((dot, index) => {
+        const angle = (index / dots.length) * Math.PI * 2;
+        const distance = 50 + Math.sin(Date.now() / 200 + index) * 30;
+        const dotX = mouseX + Math.cos(angle) * distance;
+        const dotY = mouseY + Math.sin(angle) * distance;
+
+        dot.style.left = dotX + 'px';
+        dot.style.top = dotY + 'px';
+        dot.style.transform = 'translate(-50%, -50%) scale(' + (0.5 + Math.sin(Date.now() / 200 + index) * 0.5) + ')';
+      });
+    });
+  });
+</script>
+
+
+
+    
 </body>
 </html>
