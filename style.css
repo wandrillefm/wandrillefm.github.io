@@ -5,6 +5,9 @@ body {
     padding: 0;
     color: #37352f;
     background-color: #faf9f7;
+    background-image:
+        radial-gradient(circle at center, #333 0%, #333 25%, transparent 25%, transparent 100%);
+    background-size: 20px 20px;
 }
 .container {
     max-width: 840px;
