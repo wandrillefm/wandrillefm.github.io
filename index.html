@@ -47,39 +47,53 @@
         </div>
     </div>
 
-<script>
+    <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const dotsContainer = document.createElement('div');
-    dotsContainer.classList.add('dots');
-    document.body.appendChild(dotsContainer);
-
-    const dotCount = 50;
+    const dotCount = 200;
     const dots = [];
+    const repelRadius = 100;
 
+    // Create dots
     for (let i = 0; i < dotCount; i++) {
       const dot = document.createElement('div');
-      dot.classList.add('dot');
-      dotsContainer.appendChild(dot);
+      dot.classList.add('interactive-dot');
+      dot.style.position = 'fixed';
+      dot.style.width = '4px';
+      dot.style.height = '4px';
+      dot.style.backgroundColor = '#333';
+      dot.style.borderRadius = '50%';
+      dot.style.pointerEvents = 'none';
+      dot.style.zIndex = '-1';
+      document.body.appendChild(dot);
       dots.push(dot);
+
+      // Random initial position
+      dot.style.left = Math.random() * 100 + 'vw';
+      dot.style.top = Math.random() * 100 + 'vh';
     }
 
+    // Repel dots on mousemove
     document.addEventListener('mousemove', function(e) {
       const mouseX = e.clientX;
       const mouseY = e.clientY;
 
-      dots.forEach((dot, index) => {
-        const angle = (index / dots.length) * Math.PI * 2;
-        const distance = 50 + Math.sin(Date.now() / 200 + index) * 30;
-        const dotX = mouseX + Math.cos(angle) * distance;
-        const dotY = mouseY + Math.sin(angle) * distance;
+      dots.forEach(dot => {
+        const dotRect = dot.getBoundingClientRect();
+        const dotX = dotRect.left + dotRect.width / 2;
+        const dotY = dotRect.top + dotRect.height / 2;
+        const distance = Math.sqrt((mouseX - dotX) ** 2 + (mouseY - dotY) ** 2);
 
-        dot.style.left = dotX + 'px';
-        dot.style.top = dotY + 'px';
-        dot.style.transform = 'translate(-50%, -50%) scale(' + (0.5 + Math.sin(Date.now() / 200 + index) * 0.5) + ')';
+        if (distance < repelRadius) {
+          const angle = Math.atan2(mouseY - dotY, mouseX - dotX);
+          const repelDistance = (repelRadius - distance) / repelRadius * 30;
+          dot.style.left = parseFloat(dot.style.left) - Math.cos(angle) * repelDistance + 'px';
+          dot.style.top = parseFloat(dot.style.top) - Math.sin(angle) * repelDistance + 'px';
+        }
       });
     });
   });
 </script>
+
 
 
 
