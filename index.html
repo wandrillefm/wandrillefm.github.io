@@ -3,100 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f4;
-        }
-        header {
-            background: #35424a;
-            color: #fff;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        .about, .projects, .contact {
-            padding: 2rem 0;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            background: #35424a;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>My Notion-Style Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>My Portfolio</h1>
-            <p>Web Developer & Designer</p>
+    <div class="container">
+        <div class="block">
+            <h1 class="page-title">My Portfolio</h1>
         </div>
-    </header>
 
-    <section class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Hello! I'm a passionate web developer with experience in HTML, CSS, and JavaScript. I love creating beautiful, functional websites and applications.</p>
+        <div class="block text-block">
+            <p>Hello! I'm a web developer and designer with a passion for creating clean, functional, and user-friendly digital experiences. This is my Notion-style portfolio.</p>
         </div>
-    </section>
 
-    <section class="projects">
-        <div class="container">
-            <h2>My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Project 1</h3>
-                    <p>A responsive website built with HTML, CSS, and JavaScript.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Project 2</h3>
-                    <p>An interactive web app using React and Node.js.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Project 3</h3>
-                    <p>A mobile-friendly portfolio for a local artist.</p>
-                </div>
+        <div class="block">
+            <h2>Projects</h2>
+            <div class="project-block">
+                <h3 class="project-title">Project 1: Website Redesign</h3>
+                <p class="project-description">A complete redesign of a company website using modern HTML, CSS, and JavaScript.</p>
+            </div>
+            <div class="project-block">
+                <h3 class="project-title">Project 2: Mobile App Prototype</h3>
+                <p class="project-description">Designed and prototyped a mobile app for task management using Figma and React Native.</p>
             </div>
         </div>
-    </section>
 
-    <section class="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
+        <div class="block">
+            <h2>Skills</h2>
+            <div class="skills-list">
+                <span class="skill">HTML</span>
+                <span class="skill">CSS</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Figma</span>
+                <span class="skill">UI/UX Design</span>
+            </div>
+        </div>
+
+        <div class="block text-block">
+            <h2>Contact</h2>
             <p>Email: your.email@example.com</p>
             <p>LinkedIn: linkedin.com/in/yourprofile</p>
         </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
-    </footer>
+    </div>
 </body>
 </html>
