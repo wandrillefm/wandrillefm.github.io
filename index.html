@@ -3,117 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wandrille Fernex de Mongex</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Interactive Dot Grid</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #faf9f7;
+        }
+        .interactive-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="block">
-            <h1 class="page-title">Mon Portfolio</h1>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dotSize = 4;
+            const spacing = 20;
+            const repelRadius = 100;
+            const repelStrength = 30;
+            const dots = [];
 
-        <div class="block text-block">
-            <p>Je suis en terminale à Chambéry, </p>
-        </div>
+            // Create a grid of dots
+            const cols = Math.ceil(window.innerWidth / spacing);
+            const rows = Math.ceil(window.innerHeight / spacing);
 
-        <div class="block">
-            <h2>Projects</h2>
-            <div class="project-block">
-                <h3 class="project-title">Project 1: Website Redesign</h3>
-                <p class="project-description">A complete redesign of a company website using modern HTML, CSS, and JavaScript.</p>
-            </div>
-            <div class="project-block">
-                <h3 class="project-title">Project 2: Mobile App Prototype</h3>
-                <p class="project-description">Designed and prototyped a mobile app for task management using Figma and React Native.</p>
-            </div>
-        </div>
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('interactive-dot');
+                    dot.style.left = (i * spacing) + 'px';
+                    dot.style.top = (j * spacing) + 'px';
+                    document.body.appendChild(dot);
+                    dots.push({
+                        element: dot,
+                        x: i * spacing,
+                        y: j * spacing,
+                        baseX: i * spacing,
+                        baseY: j * spacing
+                    });
+                }
+            }
 
-        <div class="block">
-            <h2>Skills</h2>
-            <div class="skills-list">
-                <span class="skill">HTML</span>
-                <span class="skill">CSS</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">React</span>
-                <span class="skill">Figma</span>
-                <span class="skill">UI/UX Design</span>
-            </div>
-        </div>
+            // Repel dots on mousemove
+            document.addEventListener('mousemove', function(e) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
 
-        <div class="block text-block">
-            <h2>Contact</h2>
-            <p>Email: your.email@example.com</p>
-            <p>LinkedIn: linkedin.com/in/yourprofile</p>
-        </div>
-    </div>
+                dots.forEach(dot => {
+                    const dx = mouseX - dot.x;
+                    const dy = mouseY - dot.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const dotSize = 4;
-    const spacing = 20;
-    const repelRadius = 100;
-    const repelStrength = 30;
-    const dots = [];
+                    if (distance < repelRadius) {
+                        const angle = Math.atan2(dy, dx);
+                        const repelDistance = (1 - distance / repelRadius) * repelStrength;
+                        dot.x = dot.baseX - Math.cos(angle) * repelDistance;
+                        dot.y = dot.baseY - Math.sin(angle) * repelDistance;
+                        dot.element.style.left = dot.x + 'px';
+                        dot.element.style.top = dot.y + 'px';
+                    } else {
+                        // Return to original position
+                        dot.x = dot.baseX;
+                        dot.y = dot.baseY;
+                        dot.element.style.left = dot.x + 'px';
+                        dot.element.style.top = dot.y + 'px';
+                    }
+                });
+            });
 
-    // Create a grid of dots
-    const cols = Math.ceil(window.innerWidth / spacing);
-    const rows = Math.ceil(window.innerHeight / spacing);
-
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        const dot = document.createElement('div');
-        dot.classList.add('interactive-dot');
-        dot.style.left = (i * spacing) + 'px';
-        dot.style.top = (j * spacing) + 'px';
-        document.body.appendChild(dot);
-        dots.push({
-          element: dot,
-          x: i * spacing,
-          y: j * spacing,
-          baseX: i * spacing,
-          baseY: j * spacing
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                location.reload();
+            });
         });
-      }
-    }
-
-    // Repel dots on mousemove
-    document.addEventListener('mousemove', function(e) {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      dots.forEach(dot => {
-        const dx = mouseX - dot.x;
-        const dy = mouseY - dot.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < repelRadius) {
-          const angle = Math.atan2(dy, dx);
-          const repelDistance = (1 - distance / repelRadius) * repelStrength;
-          dot.x = dot.baseX - Math.cos(angle) * repelDistance;
-          dot.y = dot.baseY - Math.sin(angle) * repelDistance;
-          dot.element.style.left = dot.x + 'px';
-          dot.element.style.top = dot.y + 'px';
-        } else {
-          // Return to original position
-          dot.x = dot.baseX;
-          dot.y = dot.baseY;
-          dot.element.style.left = dot.x + 'px';
-          dot.element.style.top = dot.y + 'px';
-        }
-      });
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', function() {
-      location.reload();
-    });
-  });
-</script>
-
-
-
-
-
-    
+    </script>
 </body>
 </html>
