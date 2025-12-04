@@ -59,3 +59,25 @@ body {
     color: #37352f;
     border: none;
 }
+.dots {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(circle at 10px 10px, #ddd 2%, transparent 2%);
+    background-size: 20px 20px;
+    opacity: 0.3;
+}
+.dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #aaa;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+}
