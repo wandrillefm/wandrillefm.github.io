@@ -3,105 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
- <link rel="stylesheet" href="styles.css">
-
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Mon Portfolio</h1>
-        <p class="text-block">
-            Bienvenue sur mon portfolio ! Je suis Wandrille, passionné d'informatique, de dessin, de musique et de rugby.
-        </p>
-
-        <div class="project-block">
-            <h3 class="project-title">Page de présentation pour Tradiscout (site statique)</h3>
-            <p class="project-description">
-                Site de présentation et boutique de Tradiscout
-            </p>
-            <a href="tradiscout.github.io">Voir le site</a>
+    <header>
+        <h1>My Portfolio</h1>
+        <p>A showcase of my work in <span>web design</span> and development.</p>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a passionate designer with experience in creating user-friendly interfaces. My skills include HTML, CSS, and JavaScript.</p>
+        <button>Contact Me</button>
+    </section>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-card">
+            <h3>Project 1</h3>
+            <p>A neumorphic-inspired website built with modern CSS techniques.</p>
         </div>
-
-        <div class="project-block">
-            <h3 class="project-title">Page de présentation pour </h3>
-            <p class="project-description">
-                Site de présenation et boutique de 
-            </p>
+        <div class="project-card">
+            <h3>Project 2</h3>
+            <p>An interactive app featuring smooth animations and responsive design.</p>
         </div>
-
-        <div>
-            <h3>Compétences</h3>
-            <div class="skills-list">
-                <span class="skill">Python</span>
-                <span class="skill">HTML/CSS</span>
-                <span class="skill">JavaScript</span>
-                <span class="skill">Photographie</span>
-                <span class="skill">Dessin</span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dotSize = 4;
-            const spacing = 20;
-            const repelRadius = 100;
-            const repelStrength = 30;
-            const dots = [];
-
-            // Create a grid of dots
-            const cols = Math.ceil(window.innerWidth / spacing);
-            const rows = Math.ceil(window.innerHeight / spacing);
-
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('interactive-dot');
-                    dot.style.left = (i * spacing) + 'px';
-                    dot.style.top = (j * spacing) + 'px';
-                    document.body.appendChild(dot);
-                    dots.push({
-                        element: dot,
-                        x: i * spacing,
-                        y: j * spacing,
-                        baseX: i * spacing,
-                        baseY: j * spacing
-                    });
-                }
-            }
-
-            // Repel dots on mousemove
-            document.addEventListener('mousemove', function(e) {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-
-                dots.forEach(dot => {
-                    const dx = mouseX - dot.x;
-                    const dy = mouseY - dot.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < repelRadius) {
-                        const angle = Math.atan2(dy, dx);
-                        const repelDistance = (1 - distance / repelRadius) * repelStrength;
-                        dot.x = dot.baseX - Math.cos(angle) * repelDistance;
-                        dot.y = dot.baseY - Math.sin(angle) * repelDistance;
-                        dot.element.style.left = dot.x + 'px';
-                        dot.element.style.top = dot.y + 'px';
-                    } else {
-                        // Return to original position
-                        dot.x = dot.baseX;
-                        dot.y = dot.baseY;
-                        dot.element.style.left = dot.x + 'px';
-                        dot.element.style.top = dot.y + 'px';
-                    }
-                });
-            });
-
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                location.reload();
-            });
-        });
-    </script>
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 My Name. All rights reserved.</p>
+    </footer>
 </body>
 </html>
