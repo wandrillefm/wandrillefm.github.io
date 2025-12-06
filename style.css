@@ -5,13 +5,23 @@ body {
     margin: 0;
     padding: 0;
     color: #555;
+    display: flex;
+    justify-content: center; /* Center the container horizontally */
+    min-height: 100vh; /* Full height for vertical centering if needed */
+}
+
+/* Container for centering and responsiveness */
+.container {
+    max-width: 800px; /* Limits width on large screens */
+    width: 100%;
+    padding: 0 20px; /* Adds side padding for breathing room */
 }
 
 /* Neumorphic raised effect for sections and header */
 header, section, footer {
     background: #e0e5ec;
     box-shadow: 9px 9px 16px #b3b9c5, -9px -9px 16px #ffffff;
-    margin: 20px;
+    margin: 20px 0; /* Vertical margin only, no horizontal for centering */
     padding: 20px;
     border-radius: 20px;
 }
@@ -52,6 +62,9 @@ button {
     cursor: pointer;
     font-size: 1em;
     transition: box-shadow 0.2s;
+    display: block; /* Makes it full-width on mobile */
+    margin: 10px auto; /* Centers it */
+    width: fit-content; /* Prevents full stretch on desktop */
 }
 
 button:hover {
@@ -76,4 +89,55 @@ button:hover {
 footer p {
     text-align: center;
     font-size: 0.9em;
+}
+
+/* Responsive design for phones (up to 768px width) */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px; /* Tighter padding on small screens */
+    }
+    
+    header, section, footer {
+        margin: 10px 0; /* Reduce vertical margins */
+        padding: 15px; /* Reduce padding */
+        border-radius: 15px; /* Slightly smaller radius */
+        box-shadow: 6px 6px 12px #b3b9c5, -6px -6px 12px #ffffff; /* Softer shadows for performance */
+    }
+    
+    h1 {
+        font-size: 2em; /* Smaller title */
+    }
+    
+    h2 {
+        font-size: 1.5em; /* Smaller headings */
+    }
+    
+    p {
+        font-size: 0.9em; /* Smaller text */
+    }
+    
+    button {
+        padding: 8px 16px; /* Smaller button */
+        font-size: 0.9em;
+    }
+    
+    .project-card {
+        padding: 10px; /* Tighter padding */
+        box-shadow: inset 4px 4px 8px #b3b9c5, inset -4px -4px 8px #ffffff; /* Softer inset */
+    }
+}
+
+/* Extra small phones (up to 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    h2 {
+        font-size: 1.3em;
+    }
+    
+    p, button {
+        font-size: 0.85em;
+    }
 }
