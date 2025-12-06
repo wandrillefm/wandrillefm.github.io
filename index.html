@@ -2,533 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>My Portfolio</title>
+  <title>Wandrille Fernex de Mongex</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --accent: #ff6b4a;
-      --accent-soft: rgba(255, 107, 74, 0.12);
-      --text: #f5f5f5;
-      --muted: #9ea4c3;
-      --border: #252a3d;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.55);
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-sans);
-      background: radial-gradient(circle at top, #111936 0, #050816 45%, #02030a 100%);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(to bottom, rgba(5, 8, 22, 0.92), rgba(5, 8, 22, 0.75));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
-
-    .nav {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #ffb86c, #ff6b4a);
-      box-shadow: 0 0 22px rgba(255, 107, 74, 0.45);
-    }
-
-    .nav-title {
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      font-size: 15px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 4px;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #ff6b4a, #ffd86c);
-      transition: width 0.2s ease-out;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .section {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 72px 20px;
-    }
-
-    /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
-      align-items: center;
-      gap: 36px;
-      padding-top: 56px;
-      padding-bottom: 32px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: radial-gradient(circle at top left, rgba(255, 107, 74, 0.14), transparent);
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 99px;
-      background: #1afa9a;
-      box-shadow: 0 0 12px rgba(26, 250, 154, 0.7);
-    }
-
-    .hero-title {
-      font-size: clamp(32px, 5vw, 44px);
-      line-height: 1.1;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      margin-bottom: 14px;
-    }
-
-    .hero-title span {
-      background: linear-gradient(120deg, #ffb86c, #ff6b4a, #ff4a98);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      max-width: 480px;
-      color: var(--muted);
-      font-size: 15px;
-      margin-bottom: 26px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 26px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 9px 18px;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease, color 0.14s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ff6b4a, #ff4a98);
-      color: #0a0612;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-      font-weight: 600;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.7);
-    }
-
-    .btn-ghost {
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: var(--text);
-      background: rgba(6, 8, 22, 0.8);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(18, 24, 56, 0.9);
-      transform: translateY(-1px);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero-meta strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .hero-card {
-      position: relative;
-      border-radius: 26px;
-      padding: 20px;
-      background: radial-gradient(circle at top, #1b244b, #050816);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
-      min-height: 260px;
-    }
-
-    .hero-tag {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(3, 204, 160, 0.1);
-      color: #55f7c6;
-      border: 1px solid rgba(133, 255, 207, 0.6);
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 0 0, rgba(255, 107, 74, 0.3), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(79, 209, 197, 0.25), transparent 50%);
-      opacity: 0.55;
-      mix-blend-mode: screen;
-    }
-
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 10px;
-    }
-
-    .hero-name {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .hero-role {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 18px;
-    }
-
-    .hero-stat-row {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 14px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .hero-stat {
-      flex: 1;
-      padding: 9px 10px;
-      border-radius: 12px;
-      background: rgba(1, 4, 20, 0.82);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .hero-stat span {
-      display: block;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 4px;
-    }
-
-    .hero-stat strong {
-      font-size: 13px;
-      color: var(--text);
-    }
-
-    /* Sections */
-    .section-header {
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--muted);
-      max-width: 420px;
-    }
-
-    .badge {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 14px 14px 16px;
-      background: radial-gradient(circle at top left, rgba(255, 107, 74, 0.08), #050816);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-      overflow: hidden;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75);
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    .card-thumb {
-      height: 150px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #141a33, #232a4e);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.3);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .card-title {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .tag {
-      padding: 3px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      background: rgba(7, 9, 28, 0.8);
-    }
-
-    /* About / Skills */
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
-      gap: 28px;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 11px;
-      margin-top: 10px;
-    }
-
-    .chip {
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(12, 18, 40, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--muted);
-    }
-
-    /* Contact */
-    .contact-box {
-      border-radius: 22px;
-      padding: 20px 18px;
-      background: radial-gradient(circle at top left, rgba(80, 227, 194, 0.18), #050816);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
-      gap: 20px;
-      align-items: center;
-    }
-
-    .contact-note {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 8px;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 10px;
-    }
-
-    .field {
-      display: grid;
-      gap: 4px;
-      font-size: 12px;
-    }
-
-    .field label {
-      color: var(--muted);
-    }
-
-    .field input,
-    .field textarea {
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(4, 8, 26, 0.9);
-      padding: 8px 10px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 13px;
-      resize: vertical;
-      min-height: 40px;
-    }
-
-    .field input:focus,
-    .field textarea:focus {
-      outline: none;
-      border-color: #ff6b4a;
-      box-shadow: 0 0 0 1px rgba(255, 107, 74, 0.5);
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 18px 20px 26px;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    /* Responsive */
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-card {
-        order: -1;
-      }
-      .projects-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .contact-box {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .two-col {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav {
-        justify-content: space-between;
-      }
-      .nav-links {
-        display: none;
-      }
-      .section {
-        padding: 56px 18px;
-      }
-      .projects-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero {
-        padding-top: 36px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="page">
@@ -536,11 +12,11 @@
       <nav class="nav">
         <div class="nav-brand">
           <div class="nav-logo"></div>
-          <div class="nav-title">Your Name</div>
+          <div class="nav-title">Wandrille Fernex de Mongex</div>
         </div>
         <div class="nav-links">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
+          <a href="#work">Travail</a>
+          <a href="#about">Propos</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
@@ -552,29 +28,28 @@
         <div>
           <div class="pill">
             <div class="pill-dot"></div>
-            <span>Available for freelance projects</span>
+            <span>Disponible pour toute sorte de projets, même les plus fous!</span>
           </div>
           <h1 class="hero-title">
-            Portfolio of <span>Your Name</span>
+            Portfolio de <span>Wandrille</span>
           </h1>
           <p class="hero-sub">
-            Short sentence about what you do and what kind of projects you love to work on.
-            Replace this text with your own pitch.
+            J'ai commencé depuis tout petit à créer, sur papier d'abord, en dessinant, puis sur ordinateur, sur Scratch, puis Figma, Kittl, et autres.
           </p>
 
           <div class="hero-actions">
             <button class="btn btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">
-              View my work →
+              Voir mon travail →
             </button>
             <button class="btn btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-              Contact me
+              Me contacter
             </button>
           </div>
 
           <div class="hero-meta">
-            <span><strong>Role:</strong> Front-end / UI designer</span>
-            <span><strong>Location:</strong> Your City</span>
-            <span><strong>Focus:</strong> Web • Product • Branding</span>
+            <span><strong>Role:</strong> Designer front-end / UI </span>
+            <span><strong>Location:</strong> Chambéry </span>
+            <span><strong>Focus:</strong> Code • Design • Branding</span>
           </div>
         </div>
 
@@ -582,25 +57,25 @@
           <div class="hero-orbit"></div>
           <div class="hero-tag">2026 portfolio</div>
           <div class="hero-card-inner">
-            <div class="hero-label">Snapshot</div>
-            <div class="hero-name">Your Name</div>
+            <div class="hero-label">En vif</div>
+            <div class="hero-name">Wandrille Fernex de Mongex</div>
             <div class="hero-role">Designer & developer</div>
 
             <div class="hero-stat-row">
               <div class="hero-stat">
-                <span>Selected projects</span>
-                <strong>6</strong>
+                <span>Projets</span>
+                <strong>4</strong>
               </div>
               <div class="hero-stat">
-                <span>Years experience</span>
-                <strong>3+</strong>
+                <span>Années d'experience</span>
+                <strong>0 (pour l'instant)</strong>
               </div>
             </div>
 
             <div class="hero-stat-row">
               <div class="hero-stat">
-                <span>Toolset</span>
-                <strong>Figma, VS Code, Framer</strong>
+                <span>Outils</span>
+                <strong>Figma, Adobe, Github</strong>
               </div>
             </div>
           </div>
@@ -611,49 +86,48 @@
       <section class="section" id="work">
         <div class="section-header">
           <div>
-            <div class="badge">Selected work</div>
-            <h2 class="section-title">Projects</h2>
+            <div class="badge">Mon travail</div>
+            <h2 class="section-title">Projets</h2>
           </div>
           <p class="section-sub">
-            Replace these cards with real case studies. Link to live projects, prototypes,
-            or detailed write-ups.
+            Voici certains de mes projets, design ou code, graphique ou informatique.
           </p>
         </div>
 
         <div class="projects-grid">
           <article class="card">
-            <div class="card-thumb">PROJECT 01</div>
-            <h3 class="card-title">Product dashboard</h3>
+            <div class="card-thumb">PROJET 01</div>
+            <h3 class="card-title">Portfolio</h3>
             <p class="section-sub">
-              A clean analytics dashboard with dark UI and micro-interactions.
+              Page de présentation pour une photographe.
             </p>
             <div class="card-tags">
               <span class="tag">UI Design</span>
-              <span class="tag">Web App</span>
+              <span class="tag">Portfolio</span>
             </div>
           </article>
 
           <article class="card">
             <div class="card-thumb">PROJECT 02</div>
-            <h3 class="card-title">Marketing landing</h3>
+            <h3 class="card-title">Page de présentation</h3>
             <p class="section-sub">
-              High-conversion landing page focused on bold typography and clarity.
+              Identité visuelle et page d'accueil.
             </p>
             <div class="card-tags">
-              <span class="tag">Landing Page</span>
-              <span class="tag">Responsive</span>
+              <span class="tag">Page d'acceuil</span>
+              <span class="tag">Boutique</span>
             </div>
           </article>
 
           <article class="card">
-            <div class="card-thumb">PROJECT 03</div>
-            <h3 class="card-title">Brand system</h3>
+            <div class="card-thumb">PROJET 03</div>
+            <h3 class="card-title">Rebranding</h3>
             <p class="section-sub">
-              Visual identity for a small startup, used across web and print.
+              Identité visuelle, logo et bannière pour Tradiscout.
             </p>
             <div class="card-tags">
               <span class="tag">Branding</span>
-              <span class="tag">Design System</span>
+              <span class="tag">Logo design</span>
             </div>
           </article>
         </div>
@@ -663,31 +137,29 @@
       <section class="section" id="about">
         <div class="section-header">
           <div>
-            <div class="badge">About</div>
-            <h2 class="section-title">Who you are</h2>
+            <div class="badge">à propos de moi</div>
+            <h2 class="section-title">Qui suis-je</h2>
           </div>
         </div>
 
         <div class="two-col">
           <div>
             <p class="section-sub">
-              Write 3–4 short lines about your background, what you enjoy building,
-              and what kind of teams or clients you want to collaborate with.
+              Je suis en terminale maths et nsi, je dessine, je jouais du piano et du rugby, et je suis routier scout d'Europe.
             </p>
             <p class="section-sub" style="margin-top: 8px;">
-              You can also highlight your process: research, prototyping, implementation,
-              and iteration.
+              J'aime beaucoup créer, je suis un peu artiste dans l'âme.
             </p>
           </div>
           <div>
-            <div class="badge" style="margin-bottom: 8px;">Skills</div>
+            <div class="badge" style="margin-bottom: 8px;">Points forts</div>
             <div class="chip-row">
-              <span class="chip">UI / UX</span>
-              <span class="chip">Design systems</span>
-              <span class="chip">Prototyping</span>
-              <span class="chip">HTML / CSS</span>
+              <span class="chip">Design</span>
+              <span class="chip">Photographie</span>
+              <span class="chip">Dessin</span>
+              <span class="chip">HTML/CSS</span>
               <span class="chip">JavaScript</span>
-              <span class="chip">Accessibility</span>
+              <span class="chip">Art</span>
             </div>
           </div>
         </div>
@@ -698,24 +170,22 @@
         <div class="section-header">
           <div>
             <div class="badge">Contact</div>
-            <h2 class="section-title">Let’s work together</h2>
+            <h2 class="section-title">Travaillons ensemble!</h2>
           </div>
         </div>
 
         <div class="contact-box">
           <div>
             <p class="section-sub">
-              Share a bit about your project, timeline, and budget.
-              The form on the right is only front-end here; connect it to your
-              preferred backend or service.
+              Partagez votre projet, vos idées, votre thematique.
             </p>
             <p class="contact-note">
-              You can also reach me directly at <strong>you@example.com</strong>.
+              Vous pouvez aussi me contacter directement sur <strong>wandrille.fm@gmail.com</strong>.
             </p>
           </div>
           <form class="contact-form">
             <div class="field">
-              <label for="name">Name</label>
+              <label for="name">Nom</label>
               <input id="name" type="text" placeholder="Your name" />
             </div>
             <div class="field">
@@ -723,11 +193,11 @@
               <input id="email" type="email" placeholder="you@example.com" />
             </div>
             <div class="field">
-              <label for="message">Project details</label>
+              <label for="message">Details</label>
               <textarea id="message" rows="4" placeholder="Tell me about your project"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">
-              Send message
+              Envoyer le message
             </button>
           </form>
         </div>
@@ -735,7 +205,7 @@
     </main>
 
     <footer>
-      © <span id="year"></span> Your Name · Portfolio
+      © <span id="year"></span> Wandrille Fernex de Mongex · Portfolio
     </footer>
   </div>
 
