@@ -1,75 +1,79 @@
+/* Base styles */
 body {
-   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-   line-height: 1.7;
-   margin: 0;
-   padding: 0;
-   color: #37352f;
-   background-color: #faf9f7;
-   overflow-x: hidden;
-}
-.container {
-   position: relative;
-   z-index: 1;
-   max-width: 840px;
-   margin: 0 auto;
-   padding: 3rem 2rem;
-}
-.page-title {
-   font-size: 2.25rem;
-   font-weight: 650;
-   margin: 0 0 1.5rem 0;
-   color: #37352f;
-   letter-spacing: -0.02em;
-}
-.text-block {
-   font-size: 1rem;
-   color: #37352f;
-   line-height: 1.7;
-}
-.project-block {
-   border: 1px solid #e1e5e9;
-   border-radius: 4px;
-   padding: 1rem;
-   background: #fff;
-   margin-bottom: 2rem;
-}
-.project-title {
-   font-size: 1.25rem;
-   font-weight: 650;
-   margin: 0 0 0.5rem 0;
-   color: #37352f;
-}
-.project-description {
-    color: #5c5a57;
-     font-size: 1rem;
-     line-height: 1.6;
-}
-.skills-list {
-   display: flex;
-   flex-wrap: wrap;
-   gap: 0.75rem;
-   margin: 0.5rem 0;
-}
-.skill {
-   background: #e9ecef;
-   padding: 0.375rem 0.875rem;
-   border-radius: 16px;
-   font-size: 0.875rem;
-   color: #37352f;
-   border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #e0e5ec; /* Soft background for neumorphism */
+    margin: 0;
+    padding: 0;
+    color: #555;
 }
 
-        /* Dots */
-.interactive-dot {
-   position: fixed;
-   width: 4px;
-   height: 4px;
-   background-color: #333;
-   border-radius: 50%;
-   pointer-events: none;
-   z-index: 0;
+/* Neumorphic raised effect for sections and header */
+header, section, footer {
+    background: #e0e5ec;
+    box-shadow: 9px 9px 16px #b3b9c5, -9px -9px 16px #ffffff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
 }
-    
-html {
-    overflow: hidden;
+
+/* Headings */
+h1, h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+/* Paragraphs and spans */
+p {
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+span {
+    font-weight: bold;
+    color: #007bff; /* Subtle accent */
+}
+
+/* Buttons with neumorphic inset effect */
+button {
+    background: #e0e5ec;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px #b3b9c5, inset -5px -5px 10px #ffffff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: box-shadow 0.2s;
+}
+
+button:hover {
+    box-shadow: inset 7px 7px 14px #b3b9c5, inset -7px -7px 14px #ffffff;
+}
+
+/* Project cards with inset neumorphic effect */
+.project-card {
+    background: #e0e5ec;
+    box-shadow: inset 5px 5px 10px #b3b9c5, inset -5px -5px 10px #ffffff;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.project-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+/* Footer */
+footer p {
+    text-align: center;
+    font-size: 0.9em;
 }
