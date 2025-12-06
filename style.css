@@ -234,16 +234,17 @@ main {
   color: var(--text);
   font-weight: 500;
 }
-
 .hero-card {
-  position: relative;
+  position: absolute;
+  top: 0;       /* Ajuste selon ton design */
+  right: 0;     /* ou left: 0; selon ton layout */
   border-radius: 26px;
   padding: 20px;
-  background: radial-gradient(circle at top, #1b244b, #050816);
+  background: radial-gradient(circle at top, ...);
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
-  min-height: 260px;
+  min-height: 260px; /* OK, car elle ne prendra plus d'espace */
 }
 
 .hero-tag {
