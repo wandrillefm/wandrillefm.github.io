@@ -623,3 +623,63 @@ footer {
     min-height: 320px;
   }
 }
+/* Project links - full card clickable */
+.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  position: relative;
+}
+
+.card-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(255, 107, 74, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.card-link:hover::before,
+.card-link:focus::before {
+  opacity: 1;
+}
+
+.card-link:hover .card-thumb,
+.card-link:focus .card-thumb {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(255, 107, 74, 0.3);
+}
+
+.card-link:hover .card-visit,
+.card-link:focus .card-visit {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Visit link indicator */
+.card-visit {
+  font-size: 12px;
+  color: #ff6b4a;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-top: 12px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.2s ease;
+}
+
+/* Enhanced thumb hover */
+.card-thumb {
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: pointer;
+}
+
+/* Focus states for accessibility */
+.card:focus-within {
+  outline: 2px solid rgba(255, 107, 74, 0.5);
+  outline-offset: 2px;
+}
