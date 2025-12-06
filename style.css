@@ -130,6 +130,13 @@ main {
   padding-bottom: 32px;
 }
 
+/* Sur mobile → une seule colonne → EN VIF passe en dessous */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
