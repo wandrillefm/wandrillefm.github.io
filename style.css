@@ -536,3 +536,90 @@ footer {
     padding-top: 36px;
   }
 }
+/* Tally iframe perfect match for your portfolio */
+.tally-wrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(4, 8, 26, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-soft);
+  min-height: 276px;
+}
+
+.tally-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 74, 0.4), transparent);
+}
+
+.tally-frame {
+  border-radius: var(--radius-lg) !important;
+  border: none !important;
+  background: transparent !important;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+}
+
+/* Critical: Force Tally internals to match your design */
+.tally-frame ~ * [style*="background"],
+.tally-block__content,
+.tally-block__inputs input,
+.tally-block__inputs textarea {
+  background: rgba(12, 18, 40, 0.98) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: var(--text) !important;
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-sans) !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.tally-block__inputs input:focus,
+.tally-block__inputs textarea:focus {
+  border-color: #ff6b4a !important;
+  box-shadow: 0 0 0 3px rgba(255, 107, 74, 0.25), 0 4px 20px rgba(255, 107, 74, 0.15) !important;
+  background: rgba(18, 24, 56, 0.98) !important;
+}
+
+.tally-block__submit-button,
+.tally-submit-button {
+  background: linear-gradient(135deg, #ff6b4a, #ff4a98) !important;
+  color: #0a0612 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 12px 28px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: var(--font-sans) !important;
+  box-shadow: 0 12px 32px rgba(255, 107, 74, 0.4) !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+}
+
+.tally-block__submit-button:hover,
+.tally-submit-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 18px 44px rgba(255, 107, 74, 0.5) !important;
+}
+
+/* Labels match your muted text */
+.tally-block__label,
+.tally-block-title {
+  color: var(--muted) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Responsive height */
+@media (max-width: 880px) {
+  .tally-wrapper {
+    min-height: 320px;
+  }
+}
