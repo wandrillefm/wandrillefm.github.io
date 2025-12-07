@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- Your favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Theme colors -->
+  <meta name="theme-color" content="#ff6b4a">
+  <meta name="msapplication-TileColor" content="#050816">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <nav class="nav">
+        <div class="nav-brand">
+          <div class="nav-logo"></div>
+          <div class="nav-title">Your Name</div>
+        </div>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="section hero" id="top">
+        <div>
+          <div class="pill">
+            <div class="pill-dot"></div>
+            <span>Available for freelance projects</span>
+          </div>
+          <h1 class="hero-title">
+            Portfolio of <span>Your Name</span>
+          </h1>
+          <p class="hero-sub">
+            Short sentence about what you do and what kind of projects you love to work on.
+            Replace this text with your own pitch.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">
+              View my work →
+            </button>
+            <button class="btn btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              Contact me
+            </button>
+          </div>
+
+          <div class="hero-meta">
+            <span><strong>Role:</strong> Front-end / UI designer</span>
+            <span><strong>Location:</strong> Your City</span>
+            <span><strong>Focus:</strong> Web • Product • Branding</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-hidden="true">
+          <div class="hero-orbit"></div>
+          <div class="hero-tag">2026 portfolio</div>
+          <div class="hero-card-inner">
+            <div class="hero-label">Snapshot</div>
+            <div class="hero-name">Your Name</div>
+            <div class="hero-role">Designer & developer</div>
+
+            <div class="hero-stat-row">
+              <div class="hero-stat">
+                <span>Selected projects</span>
+                <strong>6</strong>
+              </div>
+              <div class="hero-stat">
+                <span>Years experience</span>
+                <strong>3+</strong>
+              </div>
+            </div>
+
+            <div class="hero-stat-row">
+              <div class="hero-stat">
+                <span>Toolset</span>
+                <strong>Figma, VS Code, Framer</strong>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Work -->
+      <section class="section" id="work">
+        <div class="section-header">
+          <div>
+            <div class="badge">Selected work</div>
+            <h2 class="section-title">Projects</h2>
+          </div>
+          <p class="section-sub">
+            Replace these cards with real case studies. Link to live projects, prototypes,
+            or detailed write-ups.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card" tabindex="0">
+            <a href="https://your-project-01.com" target="_blank" class="card-link" rel="noopener">
+              <div class="card-thumb">PROJECT 01</div>
+              <h3 class="card-title">Product dashboard</h3>
+              <p class="section-sub">A clean analytics dashboard with dark UI and micro-interactions.</p>
+              <div class="card-tags">
+                <span class="tag">UI Design</span>
+                <span class="tag">Web App</span>
+              </div>
+              <div class="card-visit">→ Visit live site</div>
+            </a>
+          </article>
+
+          <article class="card" tabindex="0">
+            <a href="https://your-project-02.com" target="_blank" class="card-link" rel="noopener">
+              <div class="card-thumb">PROJECT 02</div>
+              <h3 class="card-title">Marketing landing</h3>
+              <p class="section-sub">High-conversion landing page focused on bold typography and clarity.</p>
+              <div class="card-tags">
+                <span class="tag">Landing Page</span>
+                <span class="tag">Responsive</span>
+              </div>
+              <div class="card-visit">→ Visit live site</div>
+            </a>
+          </article>
+
+          <article class="card" tabindex="0">
+            <a href="https://your-project-03.com" target="_blank" class="card-link" rel="noopener">
+              <div class="card-thumb">PROJECT 03</div>
+              <h3 class="card-title">Brand system</h3>
+              <p class="section-sub">Visual identity for a small startup, used across web and print.</p>
+              <div class="card-tags">
+                <span class="tag">Branding</span>
+                <span class="tag">Design System</span>
+              </div>
+              <div class="card-visit">→ Visit live site</div>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="section" id="about">
+        <div class="section-header">
+          <div>
+            <div class="badge">About</div>
+            <h2 class="section-title">Who you are</h2>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <p class="section-sub">
+              Write 3–4 short lines about your background, what you enjoy building,
+              and what kind of teams or clients you want to collaborate with.
+            </p>
+            <p class="section-sub" style="margin-top: 8px;">
+              You can also highlight your process: research, prototyping, implementation,
+              and iteration.
+            </p>
+          </div>
+          <div>
+            <div class="badge" style="margin-bottom: 8px;">Skills</div>
+            <div class="chip-row">
+              <span class="chip">UI / UX</span>
+              <span class="chip">Design systems</span>
+              <span class="chip">Prototyping</span>
+              <span class="chip">HTML / CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">Accessibility</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section" id="contact">
+        <div class="section-header">
+          <div>
+            <div class="badge">Contact</div>
+            <h2 class="section-title">Let's work together</h2>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div>
+            <p class="section-sub">
+              Share a bit about your project, timeline, and budget.
+              Submissions go straight to Notion.
+            </p>
+            <p class="contact-note">
+              You can also reach me directly at <strong>you@example.com</strong>.
+            </p>
+          </div>
+          
+          <!-- Styled Tally iframe -->
+          <div class="tally-wrapper">
+            <iframe 
+              data-tally-src="https://tally.so/embed/aQ946E?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+              loading="lazy" 
+              width="100%" 
+              height="276" 
+              frameborder="0" 
+              marginheight="0" 
+              marginwidth="0" 
+              title="Prendre contact"
+              class="tally-frame">
+            </iframe>
+            <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> Your Name · Portfolio
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
