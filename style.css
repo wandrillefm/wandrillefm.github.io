@@ -694,23 +694,3 @@ footer {
   outline-offset: 2px;
 }
 
-
-
-/* DEBUG — enlève toute expansion anormale dans la hero */
-.section.hero {
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.hero {
-    padding-bottom: 0 !important;
-}
-
-.hero-card {
-    min-height: auto !important;
-}
-
-/* Désactive TOTALEMENT l’élément suspect */
-.hero-orbit {
-    display: none !important;
-}
