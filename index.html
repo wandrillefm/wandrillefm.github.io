@@ -4,205 +4,591 @@
   <meta charset="UTF-8" />
   <title>Wandrille Fernex de Mongex</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <!-- Your favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon (5).ico" type="image/x-icon">
-  
-  <!-- Theme colors -->
-  <meta name="theme-color" content="#ff6b4a">
-  <meta name="msapplication-TileColor" content="#050816">
-  
-  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#0a0a0a">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #f5f5f5;
+      font-family: 'Press Start 2P', monospace;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: rgba(245, 245, 245, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.1s ease;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5vw;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(245, 245, 245, 0.1);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.1rem;
+      font-family: 'Orbitron', monospace;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(45deg, #f5f5f5, #ccc);
+      border: 2px solid #333;
+      border-radius: 4px;
+      position: relative;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-link {
+      position: relative;
+      color: rgba(245, 245, 245, 0.5);
+      font-size: 0.75rem;
+      text-decoration: none;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #f5f5f5;
+      border-bottom-color: #f5f5f5;
+    }
+
+    .nav-link.active::after {
+      content: '★';
+      position: absolute;
+      top: -10px;
+      right: -15px;
+      font-size: 0.8rem;
+      animation: star 1s ease-in-out infinite;
+    }
+
+    @keyframes star {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(180deg); }
+    }
+
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* HOME */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.8;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .char {
+      display: inline-block;
+      background: linear-gradient(45deg, transparent, rgba(245,245,245,0.1), transparent);
+      padding: 0 0.1em;
+      mix-blend-mode: difference;
+      transition: all 0.3s ease;
+    }
+
+    .char:hover {
+      text-shadow: 0 0 30px rgba(245, 245, 245, 0.5);
+      transform: scale(1.05);
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #ccc;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 4rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #999;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      color: #f5f5f5;
+      font-weight: 700;
+      display: block;
+    }
+
+    .hero-aside {
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .pill {
+      background: rgba(245, 245, 245, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(245, 245, 245, 0.2);
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .pill-dot {
+      width: 10px;
+      height: 10px;
+      background: #f5f5f5;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+      box-shadow: 0 0 20px rgba(245, 245, 245, 0.5);
+      display: inline-block;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* WORK */
+    .projects {
+      padding: 10vh 5vw;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .project {
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(245, 245, 245, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .project.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project:hover {
+      border-color: rgba(245, 245, 245, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(245, 245, 245, 0.1);
+    }
+
+    .project-media {
+      height: 250px;
+      background: linear-gradient(135deg, #333, #555);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #ccc;
+      position: relative;
+    }
+
+    .project-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      height: 100%;
+    }
+
+    .project-info {
+      padding: 2rem;
+    }
+
+    .project-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .project-tags span {
+      font-size: 0.7rem;
+      color: #999;
+      padding: 0.25rem 0.75rem;
+      background: rgba(245, 245, 245, 0.05);
+      border: 1px solid rgba(245, 245, 245, 0.2);
+      border-radius: 4px;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 10vh 5vw;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .about-content.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill {
+      background: rgba(245, 245, 245, 0.05);
+      border: 1px solid rgba(245, 245, 245, 0.2);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .skill:hover {
+      background: rgba(245, 245, 245, 0.1);
+      border-color: #f5f5f5;
+    }
+
+    /* CONTACT */
+    .contact {
+      padding: 10vh 5vw;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .contact-content.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-email {
+      font-size: 1.5rem;
+      color: #f5f5f5;
+      background: rgba(245, 245, 245, 0.1);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      border: 1px solid #333;
+      display: inline-block;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-email:hover {
+      box-shadow: 0 0 30px rgba(245, 245, 245, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1.5rem;
+      }
+      
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+      }
+      
+      .hero-stats {
+        justify-content: center;
+      }
+      
+      .projects {
+        grid-template-columns: 1fr;
+        padding: 5vh 5vw;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <nav class="nav">
-        <div class="nav-brand">
-          <div class="nav-logo"></div>
-          <div class="nav-title">Wandrille Fernex de Mongex</div>
+  <div class="cursor"></div>
+  
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo"></div>
+      <span>Wandrille</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link active" data-page="home">Accueil</a>
+      <a class="nav-link" data-page="work">Travail</a>
+      <a class="nav-link" data-page="about">À propos</a>
+      <a class="nav-link" data-page="contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <main class="page home active">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-meta">
+          <span class="role">Designer front-end / UI</span>
+          <span class="location">Chambéry</span>
         </div>
-        <div class="nav-links">
-          <a href="#work">Travail</a>
-          <a href="#about">À propos</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <!-- Hero -->
-      <section class="section hero" id="top">
-        <div>
-          <div class="pill">
-            <div class="pill-dot"></div>
-            <span>Disponible pour vos projets</span>
+        <h1 class="hero-title">
+          <span class="char" data-text="W">W</span>
+          <span class="char" data-text="a">a</span>
+          <span class="char" data-text="n">n</span>
+          <span class="char" data-text="d">d</span>
+          <span class="char" data-text="r">r</span>
+          <span class="char" data-text="i">i</span>
+          <span class="char" data-text="l">l</span>
+          <span class="char" data-text="l">l</span>
+          <span class="char" data-text="e">e</span>
+        </h1>
+        <p class="hero-subtitle">Portfolio 2026</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-label">Projets</span>
+            <span class="stat-value">7</span>
           </div>
-          <h1 class="hero-title">
-            Portfolio de <span>Wandrille</span>
-          </h1>
-          <p class="hero-sub">
-            J'utilise Figma, Kittl et github pour mener mes projets.
-          </p>
-
-          <div class="hero-actions">
-            <button class="btn btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">
-              Voir mon travail →
-            </button>
-            <button class="btn btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-              Me contacter
-            </button>
-          </div>
-
-          <div class="hero-meta">
-            <span><strong>Rôle:</strong> Designer front-end / UI</span>
-            <span><strong>Location:</strong> Chambéry</span>
-            <span><strong>Focus:</strong> Code • UI • Design/Branding</span>
+          <div class="stat">
+            <span class="stat-label">Années</span>
+            <span class="stat-value">1</span>
           </div>
         </div>
+      </div>
+      <div class="hero-aside">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          Disponible
+        </div>
+      </div>
+    </div>
+  </main>
 
-        <aside class="hero-card" aria-hidden="true">
-          <div class="hero-orbit"></div>
-          <div class="hero-tag">Portfolio 2026</div>
-          <div class="hero-card-inner">
-            <div class="hero-label">En vif</div>
-            <div class="hero-name">Quelques informations</div>
-            <div class="hero-role">Design et devellopement</div>
-
-            <div class="hero-stat-row">
-              <div class="hero-stat">
-                <span>Projets jusqu'à présent</span>
-                <strong>7</strong>
-              </div>
-              <div class="hero-stat">
-                <span>Années d'experience</span>
-                <strong>1</strong>
-              </div>
-            </div>
-
-            <div class="hero-stat-row">
-              <div class="hero-stat">
-                <span>Outils</span>
-                <strong>Figma, Kittl, Github, Perplexity</strong>
-              </div>
+  <!-- WORK -->
+  <main class="page work">
+    <div class="projects">
+      <div class="project" data-delay="0">
+        <a href="https://tradiscout.github.io" target="_blank" class="project-link">
+          <div class="project-media">TRADISCOUT</div>
+          <div class="project-info">
+            <h3>Tradiscout</h3>
+            <p>Rebranding - Identité visuelle</p>
+            <div class="project-tags">
+              <span>Design</span>
+              <span>Branding</span>
             </div>
           </div>
-        </aside>
-      </section>
-
-      <!-- Work -->
-      <section class="section" id="work">
-        <div class="section-header">
-          <div>
-            <div class="badge">Travail séléctionné</div>
-            <h2 class="section-title">Projets</h2>
-          </div>
-        </div>
-
-        <div class="projects-grid">
-          <article class="card" tabindex="0">
-            <a href="https://tradiscout.github.io" target="_blank" class="card-link" rel="noopener">
-              <div class="card-thumb">PROJET 01</div>
-              <h3 class="card-title">Tradiscout</h3>
-              <p class="section-sub">Rebranding - Identité visuelle (Logo et visuels)</p>
-              <div class="card-tags">
-                <span class="tag">Design</span>
-                <span class="tag">Palette</span>
-              </div>
-              <div class="card-visit">→ Visiter le site</div>
-            </a>
-          </article>
-
-          <article class="card" tabindex="0">
-            <a href="https://carldelachapelle.github.io" target="_blank" class="card-link" rel="noopener">
-              <div class="card-thumb">PROJET 02</div>
-              <h3 class="card-title">De la Chapelle</h3>
-              <p class="section-sub">Page de présentation de photos et de prix</p>
-              <div class="card-tags">
-                <span class="tag">Portfolio</span>
-                <span class="tag">Css</span>
-              </div>
-              <div class="card-visit">→ Visiter le site</div>
-            </a>
-          </article>
-
-          <article class="card" tabindex="0">
-            <a href="https://your-project-03.com" target="_blank" class="card-link" rel="noopener">
-              <div class="card-thumb">PROJET 03</div>
-              <h3 class="card-title">NOM DU PROJET</h3>
-              <p class="section-sub">DESCRIPTION</p>
-              <div class="card-tags">
-                <span class="tag">TYPE</span>
-                <span class="tag">TYPE</span>
-              </div>
-              <div class="card-visit">→ Visister le site</div>
-            </a>
-          </article>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section class="section" id="about">
-        <div class="section-header">
-          <div>
-            <div class="badge">À propos</div>
-            <h2 class="section-title">Qui suis-je</h2>
-          </div>
-        </div>
-
-        <div class="two-col">
-          <div>
-            <p class="section-sub">
-             Je suis en terminale, avec les spécialités maths et nsi. Je suis passionné de création visuel, que ce soit au dessin ou au design.
-            </p>
-            <p class="section-sub" style="margin-top: 8px;">
-              J'aime aussi le piano, le rugby et le scoutisme.
-            </p>
-          </div>
-          <div>
-            <div class="badge" style="margin-bottom: 8px;">Skills</div>
-            <div class="chip-row">
-              <span class="chip">Dessin</span>
-              <span class="chip">Code</span>
-              <span class="chip">Photographie</span>
-              <span class="chip">Musique</span>
-              <span class="chip">Art</span>
-              <span class="chip">Mode</span>
+        </a>
+      </div>
+      <div class="project" data-delay="200">
+        <a href="https://carldelachapelle.github.io" target="_blank" class="project-link">
+          <div class="project-media">DE LA CHAPELLE</div>
+          <div class="project-info">
+            <h3>De la Chapelle</h3>
+            <p>Portfolio photo & prix</p>
+            <div class="project-tags">
+              <span>Portfolio</span>
+              <span>CSS</span>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section class="section" id="contact">
-        <div class="section-header">
-          <div>
-            <div class="badge">Contact</div>
-            <h2 class="section-title">Travaillons ensemble!</h2>
+        </a>
+      </div>
+      <div class="project" data-delay="400">
+        <a href="#" target="_blank" class="project-link">
+          <div class="project-media">PROJET 03</div>
+          <div class="project-info">
+            <h3>Nouveau projet</h3>
+            <p>À venir...</p>
+            <div class="project-tags">
+              <span>Design</span>
+              <span>Dev</span>
+            </div>
           </div>
-        </div>
+        </a>
+      </div>
+    </div>
+  </main>
 
-        <div class="contact-box">
-          <div>
-            <p class="section-sub">
-              Partagez vos idées, votre projet et votre objectif!
-            </p>
-            <p class="contact-note">
-              Vous pouvez aussi me contacter directement à l'adresse suivante:  <strong>wandrille.fm@gmail.com</strong>.
-            </p>
-     
+  <!-- ABOUT -->
+  <main class="page about">
+    <div class="about">
+      <div class="about-content">
+        <p class="about-text">
+          Terminale maths/NSI. Passionné de création visuelle, design et code. 
+          Piano, rugby, scoutisme.
+        </p>
+        <div class="skills-grid">
+          <div class="skill">Dessin</div>
+          <div class="skill">Code</div>
+          <div class="skill">Photographie</div>
+          <div class="skill">Musique</div>
+          <div class="skill">Art</div>
+          <div class="skill">Mode</div>
+          <div class="skill">Figma</div>
+          <div class="skill">GitHub</div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <footer>
-      © <span id="year"></span> Wandrille Fernex de Mongex · Portfolio
-    </footer>
-  </div>
+  <!-- CONTACT -->
+  <main class="page contact">
+    <div class="contact">
+      <div class="contact-content">
+        <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Travaillons ensemble!</h2>
+        <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 2rem;">
+          Partagez vos idées et projets
+        </p>
+        <a href="mailto:wandrille.fm@gmail.com" class="contact-email">
+          wandrille.fm@gmail.com
+        </a>
+      </div>
+    </div>
+  </main>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Nav page switching
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        
+        // Update nav
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        // Switch pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelector(`.page.${page}`).classList.add('active');
+        
+        // Animate content
+        setTimeout(() => animatePage(page), 100);
+      });
+    });
+
+    // Animate page content
+    function animatePage(page) {
+      if (page === 'work') {
+        document.querySelectorAll('.project').forEach((proj, i) => {
+          setTimeout(() => proj.classList.add('animate'), i * 150);
+        });
+      } else if (page === 'about' || page === 'contact') {
+        document.querySelector('.page.active .about-content, .page.active .contact-content')
+          ?.classList.add('animate');
+      }
+    }
+
+    // Char hover effects
+    document.querySelectorAll('.char').forEach(char => {
+      char.addEventListener('mouseenter', () => {
+        char.style.animation = 'none';
+        char.offsetHeight;
+        char.style.animation = 'charGlow 0.3s ease';
+      });
+    });
+
+    // Initial animation
+    animatePage('home');
   </script>
 </body>
 </html>
