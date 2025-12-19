@@ -8,108 +8,64 @@
   <meta name="theme-color" content="#0a0a0a">
   <style>
     
-.parent {
+<style>
+  /* TON CSS ACTUEL (grille, div1, div2, etc.) */
+  .parent {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 8px;
-}
-    
-.div1 {
-    grid-row: span 5 / span 5;
-}
+  }
 
-.div2 {
-    grid-row: span 5 / span 5;
-    grid-column-start: 5;
-    grid-row-start: 1;
-}
+  .div1 { grid-row: span 5 / span 5; }
+  .div2 { grid-row: span 5 / span 5; grid-column-start: 5; grid-row-start: 1; }
+  .div3 { grid-column: span 2 / span 2; grid-column-start: 2; grid-row-start: 1; }
+  .div4 { grid-row: span 3 / span 3; grid-column-start: 4; grid-row-start: 1; }
+  .div6 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 3; grid-row-start: 4; }
+  .div7 { grid-row: span 2 / span 2; grid-column-start: 2; grid-row-start: 4; }
+  .div8 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 2; grid-row-start: 2; }
 
-.div3 {
-    grid-column: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 1;
-}
+  /* ⬇️ COLLE LE STYLE NOTION ICI ⬇️ */
+  * {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Inter, Helvetica, Arial, sans-serif;
+  }
 
-.div4 {
-    grid-row: span 3 / span 3;
-    grid-column-start: 4;
-    grid-row-start: 1;
-}
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #0a0a0a;
+    color: #e6e6e6;
+  }
 
-.div6 {
-    grid-column: span 2 / span 2;
-    grid-row: span 2 / span 2;
-    grid-column-start: 3;
-    grid-row-start: 4;
-}
+  .parent {
+    height: calc(100vh - 48px);
+    gap: 12px;
+  }
 
-.div7 {
-    grid-row: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 4;
-}
+  .parent > div {
+    background: linear-gradient(180deg, #111827, #0b1220);
+    border: 1px solid rgba(65, 105, 225, 0.25);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.02),
+      0 8px 24px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #c7d2fe;
+  }
 
-.div8 {
-    grid-column: span 2 / span 2;
-    grid-row: span 2 / span 2;
-    grid-column-start: 2;
-    grid-row-start: 2;
-}
-/* Reset léger */
-* {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Inter, Helvetica, Arial, sans-serif;
-}
+  .parent > div:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px rgba(65, 105, 225, 0.4),
+      0 12px 32px rgba(0, 0, 0, 0.8);
+  }
+</style>
 
-body {
-  margin: 0;
-  padding: 24px;
-  background: #0a0a0a;
-  color: #e6e6e6;
-}
-
-/* Grille */
-.parent {
-  height: calc(100vh - 48px);
-  gap: 12px;
-}
-
-/* Style commun à tous les blocs */
-.parent > div {
-  background: linear-gradient(
-    180deg,
-    #111827,
-    #0b1220
-  );
-  border: 1px solid rgba(65, 105, 225, 0.25); /* bleu royal */
-  border-radius: 12px;
-  padding: 16px;
-
-  /* Effet Notion */
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.02),
-    0 8px 24px rgba(0, 0, 0, 0.6);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover subtil */
-.parent > div:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px rgba(65, 105, 225, 0.4),
-    0 12px 32px rgba(0, 0, 0, 0.8);
-}
-
-/* Numéros (optionnel, tu peux enlever si c’est du contenu réel) */
-.parent > div {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #c7d2fe; /* bleu doux */
-}
-  
   </style>
 </head>
 <body>
