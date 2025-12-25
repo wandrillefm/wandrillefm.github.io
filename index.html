@@ -2,293 +2,924 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Wandrille Fernex de Mongex</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon (2).ico" type="image/x-icon">
-  <meta name="theme-color" content="#0a0a0a">
+  <title>Wandrille Fernex de Mongex – Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
-   * {
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Inter, Helvetica, Arial, sans-serif;
-}
+    :root {
+      --bg: #050509;
+      --bg-soft: #101018;
+      --fg: #f5f3ff;
+      --muted: #9f99c2;
+      --accent: #ffb347;
+      --accent-soft: rgba(255, 179, 71, 0.18);
+      --accent-2: #6c7bff;
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 32px 80px rgba(0, 0, 0, 0.65);
+      --nav-h: 64px;
+    }
 
-body {
-  margin: 0;
-  padding: 24px;
-  background: #0a0a0a;
-  color: #e6e6e6;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.topbar {
-  position: sticky;
-  top: 12px;
-  z-index: 10;
-  margin-bottom: 16px;
-  padding: 10px 14px;
+    body {
+      min-height: 100vh;
+      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, #15131f 0, transparent 55%),
+        radial-gradient(circle at bottom right, #17192a 0, transparent 55%),
+        #050509;
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  display: flex;
-  align-items: center;
-  justify-content: center; /* centre le contenu */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-}
+    .site {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+    }
 
-.site-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #e0e7ff;
-  text-align: center;
-}
+    @media (min-width: 900px) {
+      .site {
+        padding: 32px 32px 56px;
+      }
+    }
 
+    /* NAV */
 
+    .site-nav {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
 
+    .site-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: linear-gradient(120deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-/* style des cartes */
-.parent > div {
-  background: #111827;
-  border-radius: 12px;
-  border: 1px solid rgba(65, 105, 225, 0.25);
-  padding: 16px;
-  color: #c7d2fe;
-}
+    .site-logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #fff 0, #ffb347 40%, #ff6a3d 100%);
+      box-shadow: 0 0 16px rgba(255, 179, 71, 0.85);
+    }
 
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
 
+    .nav-link {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      transition: all 160ms ease-out;
+      white-space: nowrap;
+    }
 
+    .nav-link:hover {
+      color: var(--fg);
+      border-color: var(--border-soft);
+      background: rgba(255, 255, 255, 0.02);
+    }
 
-/* Layout masonry style */
-.layout-gallery {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(80px, 1fr));
-  grid-template-rows: repeat(20, minmax(80px, 1fr));
-  gap: 10px;
-}
+    .nav-link--primary {
+      border-radius: 999px;
+      padding: 9px 18px;
+      border: 1px solid rgba(255, 179, 71, 0.4);
+      background:
+        linear-gradient(135deg, rgba(255, 179, 71, 0.16), rgba(108, 123, 255, 0.12)),
+        rgba(255, 255, 255, 0.02);
+      color: var(--fg);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 18px 40px rgba(0, 0, 0, 0.75);
+    }
 
-/* 7 */
-.div7 {
-  grid-column: 2 / span 4;  /* colonnes 2→5 */
-  grid-row: 2 / span 2;      /* lignes 2→4 */
-}
+    .nav-link--primary:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 22px 55px rgba(0, 0, 0, 0.9);
+    }
 
-/* 8 */
-.div8 {
-  grid-column: 6 / span 3;
-  grid-row: 3 / span 3;
-}
+    /* on masque Portfolio et À propos dans le header */
+    .nav-link[href="#portfolio"],
+    .nav-link[href="#apropos"] {
+      display: none;
+    }
 
-/* 9 */
-.div9 {
-  grid-column: 2 / span 3;
-  grid-row: 4 / span 3;
-}
+    @media (max-width: 700px) {
+      .site-nav {
+        gap: 10px;
+      }
+      .site-nav-links {
+        gap: 4px;
+      }
+      .nav-link {
+        padding-inline: 10px;
+      }
+      .nav-link--primary {
+        padding-inline: 12px;
+      }
+    }
 
-/* 10 */
-.div10 {
-  grid-column: 7 / span 3;
-  grid-row: 6 / span 2;
-}
+    /* LAYOUT PRINCIPAL */
 
-/* 11 */
-.div11 {
-  grid-column: 5 / span 2;
-  grid-row: 6 / span 4;
-}
+    .hero-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
 
-/* 12 */
-.div12 {
-  grid-column: 7 / span 2;
-  grid-row: 8 / span 4;
-}
+    @media (max-width: 900px) {
+      .hero-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
 
-/* 15 */
-.div15 {
-  grid-column: 3 / span 2;
-  grid-row: 7 / span 3;
-}
+    .hero-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top left, rgba(255, 179, 71, 0.16), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(108, 123, 255, 0.22), transparent 65%),
+        linear-gradient(145deg, #11121b, #050509);
+      box-shadow: var(--shadow-soft);
+      padding: 26px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* 16 */
-.div16 {
-  grid-column: 2 / span 4;
-  grid-row: 10 / span 2;
-}
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.08), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.5), transparent 55%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
 
-/* 19 */
-.div19 {
-  grid-column: 3 / span 4;
-  grid-row: 12 / span 3;
-}
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
 
-/* 20 */
-.div20 {
-  grid-column: 7 / span 3;
-  grid-row: 13 / span 4;
-}
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 5, 12, 0.7);
+      backdrop-filter: blur(16px);
+    }
 
-/* 22 */
-.div22 {
-  grid-column: 2 / span 3;
-  grid-row: 15 / span 4;
-}
+    .hero-kicker-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255, 179, 71, 0.12);
+      color: #ffcf80;
+    }
 
-/* 23 */
-.div23 {
-  grid-column: 5 / span 4;
-  grid-row: 17 / span 2;
-}
+    .hero-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-weight: 500;
+      font-size: clamp(34px, 4vw, 44px);
+      letter-spacing: 0;
+      line-height: 1.05;
+    }
 
+    .hero-title .accent {
+      color: #ffcf80;
+    }
 
-@media (max-width: 768px) {
-  .parent {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
+    .hero-sub {
+      max-width: 34rem;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
 
-  .parent > div {
-    /* on annule le placement de la grille desktop */
-    grid-column: auto !important;
-    grid-row: auto !important;
-    width: 100%;
-    max-height: 260px;       /* garde les ratios sous contrôle */
-    overflow: hidden;
-  }
+    .hero-sub b {
+      font-weight: 500;
+      color: var(--fg);
+    }
 
-  /* --- Ratios inspirés de tes spans --- */
-  /* 3 colonnes x 2 lignes → ratio 3/2 */
-  .div7,
-  .div10,
-  .div16,
-  .div19,
-  .div23 {
-    aspect-ratio: 3 / 2;
-  }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-  /* 3 colonnes x 3 lignes → 1:1 (carré) */
-  .div8,
-  .div9 {
-    aspect-ratio: 1 / 1;
-  }
+    .meta-pill {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 5, 12, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-  /* 3 colonnes x 4 lignes → 3/4 (plus vertical, mais pas infini) */
-  .div20,
-  .div22 {
-    aspect-ratio: 3 / 4;
-  }
+    .meta-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffb347, #ff6a3d);
+      box-shadow: 0 0 10px rgba(255, 179, 71, 0.7);
+    }
 
-  /* 2 colonnes x 3 lignes → 2/3 (vertical moyen) */
-  .div11,
-  .div12,
-  .div15 {
-    aspect-ratio: 2 / 3;
-  }
-}
+    /* LISTE PROJETS */
 
+    .hero-right-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-.footer {
-  margin-top: 24px;
-  padding: 12px 0;
-  text-align: center;
-  font-size: 0.8rem;
-  color: rgba(203, 213, 245, 0.6);
-}
+    .hero-right-header span {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 11px;
+    }
 
+    .hero-right-header button {
+      border: none;
+      background: rgba(5,5,12,0.7);
+      border-radius: 999px;
+      padding: 6px 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 130ms ease-out;
+    }
 
+    .hero-right-header button:hover {
+      color: var(--fg);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(15,15,25,0.9);
+    }
+
+    .hero-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .project-row {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.6));
+      padding: 14px 14px 14px 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 140ms ease-out, box-shadow 140ms ease-out, border-color 140ms ease-out, background 140ms ease-out;
+    }
+
+    .project-row::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 60%);
+      opacity: 0;
+      mix-blend-mode: screen;
+      transition: opacity 160ms ease-out;
+    }
+
+    .project-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-title {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .project-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .project-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(5, 5, 12, 0.9);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .project-thumb {
+      width: 96px;
+      height: 64px;
+      border-radius: 16px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.75);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 65%);
+      mix-blend-mode: soft-light;
+    }
+
+    .project-row:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 179, 71, 0.6);
+      background:
+        linear-gradient(135deg, rgba(255, 179, 71, 0.18), rgba(108, 123, 255, 0.16));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 24px 60px rgba(0, 0, 0, 0.95);
+    }
+
+    .project-row:hover::before {
+      opacity: 1;
+    }
+
+    .project-arrow {
+      font-size: 18px;
+      opacity: 0.65;
+      transition: transform 150ms ease-out, opacity 150ms ease-out;
+    }
+
+    .project-row:hover .project-arrow {
+      transform: translateX(3px);
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .project-row {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 12px 12px 12px 13px;
+      }
+      .project-thumb {
+        width: 100%;
+        height: 160px;
+      }
+    }
+
+    .hero-note {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 90%;
+    }
+
+    .hero-note a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      color: #ffcf80;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      gap: 10px;
+    }
+
+    .footer-pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5,5,12,0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* MODAL / POPUP */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.76);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-backdrop.is-open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(520px, 92vw);
+      max-height: 90vh;
+      background: linear-gradient(145deg, #14141f, #06060b);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 32px 90px rgba(0,0,0,0.9);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .modal-close {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 4px 6px;
+      border-radius: 999px;
+      transition: background 120ms ease-out, color 120ms ease-out, transform 120ms ease-out;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--fg);
+      transform: translateY(-1px);
+    }
+
+    .modal-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .modal-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 65%);
+      mix-blend-mode: soft-light;
+    }
+
+    .modal-counter {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(5,5,12,0.82);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .modal-arrow-btn:hover {
+      background: rgba(10,10,20,0.95);
+      transform: translateY(-50%) translateY(-1px);
+      opacity: 1;
+    }
+
+    .modal-arrow-prev {
+      left: 10px;
+    }
+
+    .modal-arrow-next {
+      right: 10px;
+    }
+
+    .modal-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .modal-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .modal-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(5, 5, 12, 0.9);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 11px;
+      color: var(--muted);
+    }
   </style>
 </head>
-<header class="topbar">
-  <span class="site-title">Wandrille Fernex de Mongex</span>
-</header>
-
-
 <body>
+  <div class="site">
+    <header class="site-nav">
+      <div class="site-logo">
+        <span class="site-logo-dot"></span>
+        <span>Wandrille Fernex de Mongex</span>
+      </div>
+      <nav class="site-nav-links">
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#apropos" class="nav-link">À propos</a>
+        <a href="mailto:wandrille.fm@gmail.com" class="nav-link nav-link--primary">Me contacter</a>
+      </nav>
+    </header>
 
-<main>
+    <main class="hero-shell">
+      <!-- LEFT -->
+      <section class="hero-card" id="apropos">
+        <div class="hero-inner">
+          <div>
+            <div class="hero-kicker">
+              <span class="hero-kicker-tag">Chambéry · FR</span>
+              <span>Design & Front-end dev</span>
+            </div>
+          </div>
 
+          <div>
+            <h1 class="hero-title">
+              Création d' <span class="accent">identités visuelles</span> pour vos projets.
+            </h1>
+          </div>
 
-<div class="parent layout-gallery">
-  <div class="div7">
-    <h2>Aux origines...</h2>
-    <p>Né à Orléans en aout 2007, curieux et creatif des mon enfance a Poitiers</p>
+          <p class="hero-sub">
+            Passionné d'<b>art</b> et plus particulièrement de <b>graphisme, programmation et musique</b>.
+          </p>
+
+          <div class="hero-meta">
+            <div class="meta-pill">
+              <span class="meta-dot"></span>
+              Design
+            </div>
+            <div class="meta-pill">
+              <span class="meta-dot"></span>
+              Front-end
+            </div>
+            <div class="meta-pill">
+              <span class="meta-dot"></span>
+              Identité visuelle
+            </div>
+          </div>
+
+          <p class="hero-note">
+            [À propos]
+          </p>
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <section class="hero-card" id="portfolio">
+        <div class="hero-inner">
+          <div class="hero-right-header">
+            <span>sélection de séries</span>
+            
+            </button>
+          </div>
+
+          <div class="hero-list">
+            <!-- PROJET 1 -->
+            <article class="project-row"
+                     data-images="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800,
+                                  https://images.pexels.com/photos/1444443/pexels-photo-1444443.jpeg?auto=compress&cs=tinysrgb&w=800,
+                                  https://images.pexels.com/photos/1444444/pexels-photo-1444444.jpeg?auto=compress&cs=tinysrgb&w=800">
+              <div class="project-main">
+                <div class="project-title">Scoutisme - tradiscout</div>
+                <div class="project-sub">Un rebranding complet, des couleurs jusqu'à la typo.</div>
+                <div class="project-meta">
+                  <span class="project-tag">Figma</span>
+                  <span class="project-tag">Affinity</span>
+                  <span class="project-tag">Kittl</span>
+                  <span class="project-tag">Github</span>
+                  <span class="project-tag">Stripe</span>
+                </div>
+              </div>
+              <div
+                class="project-thumb"
+                style="background-image:url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800');">
+              </div>
+              <div class="project-arrow">↗</div>
+            </article>
+
+            <!-- PROJET 2 -->
+            <article class="project-row"
+                     data-images="https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=800,
+                                  https://images.pexels.com/photos/2959193/pexels-photo-2959193.jpeg?auto=compress&cs=tinysrgb&w=800">
+              <div class="project-main">
+                <div class="project-title">Photographie - De la Chapelle</div>
+                <div class="project-sub">Présentation et showcase de photos et de tarifs.</div>
+                <div class="project-meta">
+                  <span class="project-tag">Figma</span>
+                  <span class="project-tag">Github</span>
+                  <span class="project-tag">Affinity</span>
+                </div>
+              </div>
+              <div
+                class="project-thumb"
+                style="background-image:url('https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=800');">
+              </div>
+              <div class="project-arrow">↗</div>
+            </article>
+
+            <!-- PROJET 3 -->
+            <article class="project-row"
+                     data-images="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=800,
+                                  https://images.pexels.com/photos/1648375/pexels-photo-1648375.jpeg?auto=compress&cs=tinysrgb&w=800">
+              <div class="project-main">
+                <div class="project-title">Photographie - Soazig de Kermenguy</div>
+                <div class="project-sub">Présentation et portfolio.</div>
+                <div class="project-meta">
+                  <span class="project-tag">Github</span>
+                  <span class="project-tag">Pixieset</span>
+                  <span class="project-tag">Figma</span>
+                </div>
+              </div>
+              <div
+                class="project-thumb"
+                style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=800');">
+              </div>
+              <div class="project-arrow">↗</div>
+            </article>
+          </div>
+
+          <p class="hero-note">
+            [Projets]
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="footer-pill">
+        <span class="meta-dot"></span>
+        Ouvert même aux idées les plus folles
+      </div>
+      <div class="footer-pill">
+        <span>Contact :</span>
+        <a href="mailto:wandrille.fm@gmail.com">wandrille.fm@gmail.com</a>
+      </div>
+    </footer>
   </div>
 
-  <div class="div8">
-    <h2>Projet photo</h2>
-    <p>Série de portraits en lumière naturelle, centrée sur les textures et les micro‑expressions.</p>
-  </div>
-
-  <div class="div9">
-    <h2>UI expérimental</h2>
-    <p>Prototype d’interface “notion‑like” pour organiser des projets créatifs, avec une grille totalement modulable.</p>
-  </div>
-
-  <div class="div10">
-    <h2>Typographie</h2>
-    <p>Tests de mise en page avec Inter, SF Pro et alternatives, pour un rendu net sur mobile et desktop.</p>
-  </div>
-
-  <div class="div11">
-    <h2>Process</h2>
-    <p>Du croquis papier au prototype haute fidélité : itérations rapides, micro‑détails et focus sur l’accessibilité.</p>
-  </div>
-
-  <div class="div12">
-    <h2>Notes de recherche</h2>
-    <p>Références visuelles, captures d’inspiration et idées brutes pour de futurs projets hybrides web/photo.</p>
-  </div>
-
-  <div class="div15">
-    <h2>Micro‑interactions</h2>
-    <p>Survols, transitions et feedback discrets qui rendent l’interface vivante sans la surcharger.</p>
-  </div>
-
-  <div class="div16">
-    <h2>Grille responsive</h2>
-    <p>Layout basé sur CSS Grid, pensé pour garder des proportions cohérentes du grand écran au téléphone.</p>
-  </div>
-
-  <div class="div19">
-    <h2>Étude de cas</h2>
-    <p>Refonte d’un portfolio existant : simplification de la navigation et mise en avant des visuels.</p>
-  </div>
-
-  <div class="div20">
-    <h2>Projet client</h2>
-    <p>Accompagnement complet sur l’identité visuelle, la structure de contenu et l’implémentation front‑end.</p>
-  </div>
-
-
-
-  <div class="div22">
-    <h2>À propos</h2>
-    <p>Développeur front‑end et photographe basé en France, avec un goût pour les interfaces calmes et structurées.</p>
-  </div>
-
-  <div class="div23">
-    <h2>Contact</h2>
-    <p>Disponible pour des projets web, direction artistique et collaborations visuelles. Écrivez‑moi pour en discuter.</p>
+  <!-- MODAL -->
+  <!-- MODAL SANS BULLES -->
+<div class="modal-backdrop" id="project-modal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <span>Détail du projet</span>
+      <button class="modal-close" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <div class="modal-image" id="modal-image">
+      <div class="modal-counter" id="modal-counter">1 / 1</div>
+    </div>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-sub" id="modal-sub"></p>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
   </div>
 </div>
 
-</main>
 
-<footer class="footer">
-  © 2025 Wandrille Fernex de Mongex
-</footer>
+  <script>
+    const modal = document.getElementById("project-modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalTitle = document.getElementById("modal-title");
+    const modalSub = document.getElementById("modal-sub");
+    const modalTags = document.getElementById("modal-tags");
+    const closeBtn = modal.querySelector(".modal-close");
 
-<script>
-  const links = document.querySelectorAll('.menu a');
-  const pages = document.querySelectorAll('.page');
+    const modalPrev = document.getElementById("modal-prev");
+    const modalNext = document.getElementById("modal-next");
+    const modalCounter = document.getElementById("modal-counter");
 
-  links.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const target = link.dataset.page; // id de la page à afficher
+    let currentGallery = [];
+    let currentIndex = 0;
 
-      pages.forEach(p => {
-        p.classList.toggle('active', p.id === target);
+    function updateModalImage() {
+      if (!currentGallery.length) return;
+      const url = currentGallery[currentIndex];
+      modalImage.style.backgroundImage = `url("${url}")`;
+      if (modalCounter) {
+        modalCounter.textContent = (currentIndex + 1) + " / " + currentGallery.length;
+      }
+    }
+
+    function openModalFromProject(projectRow) {
+      const title = projectRow.querySelector(".project-title")?.textContent || "";
+      const sub = projectRow.querySelector(".project-sub")?.textContent || "";
+      const tags = projectRow.querySelectorAll(".project-tag");
+
+      // récupère la liste des images depuis data-images
+      const dataImages = projectRow.getAttribute("data-images") || "";
+      currentGallery = dataImages
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      // fallback : si pas de data-images, on prend le background de la thumb
+      if (!currentGallery.length) {
+        const thumb = projectRow.querySelector(".project-thumb");
+        if (thumb) {
+          const style = window.getComputedStyle(thumb);
+          const bgImg = style.backgroundImage;
+          const urlMatch = bgImg.match(/url\((\"|')?(.*?)(\"|')?\)/);
+          const url = urlMatch ? urlMatch[2] : "";
+          if (url) currentGallery = [url];
+        }
+      }
+
+      currentIndex = 0;
+      updateModalImage();
+
+      modalTitle.textContent = title;
+      modalSub.textContent = sub;
+
+      modalTags.innerHTML = "";
+      tags.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "modal-tag";
+        span.textContent = tag.textContent;
+        modalTags.appendChild(span);
       });
+
+      modal.classList.add("is-open");
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      currentGallery = [];
+      currentIndex = 0;
+    }
+
+    function showNext() {
+      if (!currentGallery.length) return;
+      currentIndex = (currentIndex + 1) % currentGallery.length;
+      updateModalImage();
+    }
+
+    function showPrev() {
+      if (!currentGallery.length) return;
+      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      updateModalImage();
+    }
+
+    document.querySelectorAll(".project-row").forEach(row => {
+      row.addEventListener("click", () => openModalFromProject(row));
     });
-  });
-</script>
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // clic sur l'image = next
+    modalImage.addEventListener("click", (e) => {
+      // ne pas déclencher si clic sur les flèches
+      if (e.target === modalPrev || e.target === modalNext) return;
+      showNext();
+    });
+
+    modalNext.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    modalPrev.addEventListener("click", (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!modal.classList.contains("is-open")) return;
+      if (e.key === "Escape") {
+        closeModal();
+      }
+      if (e.key === "ArrowRight") {
+        showNext();
+      }
+      if (e.key === "ArrowLeft") {
+        showPrev();
+      }
+    });
+  </script>
 </body>
 </html>
