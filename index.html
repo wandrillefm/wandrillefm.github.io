@@ -3,924 +3,477 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wandrille Fernex de Mongex – Portfolio</title>
+  <title>Wandrille – Portfolio</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #050509;
-      --bg-soft: #101018;
-      --fg: #f5f3ff;
-      --muted: #9f99c2;
-      --accent: #ffb347;
-      --accent-soft: rgba(255, 179, 71, 0.18);
-      --accent-2: #6c7bff;
-      --border-soft: rgba(255, 255, 255, 0.05);
-      --radius-xl: 26px;
-      --radius-lg: 18px;
-      --shadow-soft: 0 32px 80px rgba(0, 0, 0, 0.65);
-      --nav-h: 64px;
+      --fg: #f5f5f7;
+      --muted: #9f9fb5;
+      --accent: #1db954;
+      --card-bg: #111119;
+      --gap: 12px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
-      font-family: "Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at top left, #15131f 0, transparent 55%),
-        radial-gradient(circle at bottom right, #17192a 0, transparent 55%),
-        #050509;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #181828 0, transparent 55%), var(--bg);
       color: var(--fg);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      padding: 16px 16px 28px;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
-    .site {
-      max-width: 1200px;
+    .shell {
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 20px 20px 40px;
-    }
-
-    @media (min-width: 900px) {
-      .site {
-        padding: 32px 32px 56px;
-      }
-    }
-
-    /* NAV */
-
-    .site-nav {
-      height: var(--nav-h);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
       gap: 16px;
-      margin-bottom: 24px;
     }
 
-    .site-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: linear-gradient(120deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    /* TOP BAR */
 
-    .site-logo-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #fff 0, #ffb347 40%, #ff6a3d 100%);
-      box-shadow: 0 0 16px rgba(255, 179, 71, 0.85);
-    }
-
-    .site-nav-links {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-    }
-
-    .nav-link {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-      transition: all 160ms ease-out;
-      white-space: nowrap;
-    }
-
-    .nav-link:hover {
-      color: var(--fg);
-      border-color: var(--border-soft);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .nav-link--primary {
-      border-radius: 999px;
-      padding: 9px 18px;
-      border: 1px solid rgba(255, 179, 71, 0.4);
-      background:
-        linear-gradient(135deg, rgba(255, 179, 71, 0.16), rgba(108, 123, 255, 0.12)),
-        rgba(255, 255, 255, 0.02);
-      color: var(--fg);
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.02),
-        0 18px 40px rgba(0, 0, 0, 0.75);
-    }
-
-    .nav-link--primary:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.04),
-        0 22px 55px rgba(0, 0, 0, 0.9);
-    }
-
-    /* on masque Portfolio et À propos dans le header */
-    .nav-link[href="#portfolio"],
-    .nav-link[href="#apropos"] {
-      display: none;
-    }
-
-    @media (max-width: 700px) {
-      .site-nav {
-        gap: 10px;
-      }
-      .site-nav-links {
-        gap: 4px;
-      }
-      .nav-link {
-        padding-inline: 10px;
-      }
-      .nav-link--primary {
-        padding-inline: 12px;
-      }
-    }
-
-    /* LAYOUT PRINCIPAL */
-
-    .hero-shell {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 900px) {
-      .hero-shell {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .hero-card {
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at top left, rgba(255, 179, 71, 0.16), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(108, 123, 255, 0.22), transparent 65%),
-        linear-gradient(145deg, #11121b, #050509);
-      box-shadow: var(--shadow-soft);
-      padding: 26px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      position: relative;
-      overflow: hidden;
-        height: 100%;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(255,255,255,0.08), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.5), transparent 55%);
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-        height: 100%;
-    }
-
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(5, 5, 12, 0.7);
-      backdrop-filter: blur(16px);
-    }
-
-    .hero-kicker-tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(255, 179, 71, 0.12);
-      color: #ffcf80;
-    }
-
-    .hero-title {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-weight: 500;
-      font-size: clamp(34px, 4vw, 44px);
-      letter-spacing: 0;
-      line-height: 1.05;
-    }
-
-    .hero-title .accent {
-      color: #ffcf80;
-    }
-
-    .hero-sub {
-      max-width: 34rem;
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .hero-sub b {
-      font-weight: 500;
-      color: var(--fg);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .meta-pill {
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(5, 5, 12, 0.8);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .meta-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffb347, #ff6a3d);
-      box-shadow: 0 0 10px rgba(255, 179, 71, 0.7);
-    }
-
-    /* LISTE PROJETS */
-
-    .hero-right-header {
+    .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      font-size: 12px;
-      color: var(--muted);
+      flex-wrap: wrap;
     }
 
-    .hero-right-header span {
-      text-transform: uppercase;
+    .brand {
+      font-size: 14px;
       letter-spacing: 0.14em;
-      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    .hero-right-header button {
-      border: none;
-      background: rgba(5,5,12,0.7);
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
       border-radius: 999px;
-      padding: 6px 11px;
-      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 5px 11px;
+      font-size: 11px;
+      color: var(--fg);
+      background: rgba(8,8,16,0.9);
       display: inline-flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: all 130ms ease-out;
     }
 
-    .hero-right-header button:hover {
-      color: var(--fg);
-      border-color: rgba(255,255,255,0.14);
-      background: rgba(15,15,25,0.9);
+    .btn--accent {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
     }
 
-    .hero-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 6px;
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     }
 
-    .project-row {
-      position: relative;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,0.08);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.6));
-      padding: 14px 14px 14px 16px;
+    /* GRID 3 COLONNES (3:4) */
+
+    .grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform 140ms ease-out, box-shadow 140ms ease-out, border-color 140ms ease-out, background 140ms ease-out;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
     }
 
-    .project-row::before {
-      content: "";
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.6);
+      aspect-ratio: 3 / 4;
+    }
+
+    .card-image {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 60%);
-      opacity: 0;
-      mix-blend-mode: screen;
-      transition: opacity 160ms ease-out;
-    }
-
-    .project-main {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .project-title {
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .project-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .project-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .project-tag {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(5, 5, 12, 0.9);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .project-thumb {
-      width: 96px;
-      height: 64px;
-      border-radius: 16px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.75);
-      position: relative;
-      overflow: hidden;
+      transition: transform 200ms ease-out, filter 200ms ease-out, opacity 200ms ease-out;
     }
 
-    .project-thumb::after {
-      content: "";
+    .card-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 65%);
-      mix-blend-mode: soft-light;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 45%);
+      opacity: 0;
+      transition: opacity 200ms ease-out;
     }
 
-    .project-row:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 179, 71, 0.6);
-      background:
-        linear-gradient(135deg, rgba(255, 179, 71, 0.18), rgba(108, 123, 255, 0.16));
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.02),
-        0 24px 60px rgba(0, 0, 0, 0.95);
-    }
-
-    .project-row:hover::before {
-      opacity: 1;
-    }
-
-    .project-arrow {
-      font-size: 18px;
-      opacity: 0.65;
-      transition: transform 150ms ease-out, opacity 150ms ease-out;
-    }
-
-    .project-row:hover .project-arrow {
-      transform: translateX(3px);
-      opacity: 1;
-    }
-
-    @media (max-width: 600px) {
-      .project-row {
-        grid-template-columns: minmax(0, 1fr);
-        padding: 12px 12px 12px 13px;
-      }
-      .project-thumb {
-        width: 100%;
-        height: 160px;
-      }
-    }
-
-    .hero-note {
-      margin-top: auto;
-      font-size: 11px;
+    .card-info {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
       color: var(--muted);
-      max-width: 90%;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 200ms ease-out, transform 200ms ease-out;
     }
 
-    .hero-note a {
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-underline-offset: 3px;
-      color: #ffcf80;
+    .card-title {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+    }
+
+    .card:hover .card-image {
+      transform: scale(1.04);
+      filter: brightness(1.03);
+    }
+
+    .card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .card:hover .card-info {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* FOOTER */
 
-    .site-footer {
-      margin-top: 26px;
+    .footer {
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
-      gap: 10px;
-    }
-
-    .footer-pill {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(5,5,12,0.8);
-      display: inline-flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
+      font-size: 10px;
+      color: var(--muted);
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 700px) {
-      .site-footer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
-    /* MODAL / POPUP */
+    .footer-right a {
+      color: var(--fg);
+      text-decoration: none;
+    }
 
-    .modal-backdrop {
+    .footer-right a:hover {
+      text-decoration: underline;
+    }
+
+    /* LIGHTBOX */
+
+    .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.76);
+      background: rgba(0,0,0,0.92);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 50;
-      backdrop-filter: blur(10px);
+      padding: 16px;
     }
 
-    .modal-backdrop.is-open {
-      display: flex;
-    }
+    .lightbox.is-open { display: flex; }
 
-    .modal-card {
-      width: min(520px, 92vw);
-      max-height: 90vh;
-      background: linear-gradient(145deg, #14141f, #06060b);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 32px 90px rgba(0,0,0,0.9);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px 8px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-    }
-
-    .modal-close {
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 18px;
-      line-height: 1;
-      padding: 4px 6px;
-      border-radius: 999px;
-      transition: background 120ms ease-out, color 120ms ease-out, transform 120ms ease-out;
-    }
-
-    .modal-close:hover {
-      background: rgba(255,255,255,0.06);
-      color: var(--fg);
-      transform: translateY(-1px);
-    }
-
-    .modal-image {
+    .lightbox-inner {
+      max-width: 900px;
       width: 100%;
-      aspect-ratio: 4 / 3;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.4fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .lightbox-image {
+      border-radius: 14px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      position: relative;
-      cursor: pointer;
+      min-height: 230px;
     }
 
-    .modal-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 65%);
-      mix-blend-mode: soft-light;
-    }
-
-    .modal-counter {
-      position: absolute;
-      bottom: 10px;
-      right: 14px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      background: rgba(5,5,12,0.82);
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .modal-arrow-btn:hover {
-      background: rgba(10,10,20,0.95);
-      transform: translateY(-50%) translateY(-1px);
-      opacity: 1;
-    }
-
-    .modal-arrow-prev {
-      left: 10px;
-    }
-
-    .modal-arrow-next {
-      right: 10px;
-    }
-
-    .modal-body {
-      padding: 16px 18px 18px;
+    .lightbox-meta {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .modal-title {
-      font-size: 18px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    .modal-sub {
-      font-size: 13px;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 12px;
       color: var(--muted);
     }
 
-    .modal-tags {
+    .lightbox-meta-top {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .lightbox-title {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+
+    .lightbox-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 6px;
     }
 
-    .modal-tag {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(5, 5, 12, 0.9);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 11px;
+    .lightbox-close {
+      position: fixed;
+      top: 12px;
+      right: 14px;
+      font-size: 20px;
+      cursor: pointer;
       color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      body { padding-inline: 12px; }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .lightbox-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .lightbox-image {
+        aspect-ratio: 3 / 4;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="site">
-    <header class="site-nav">
-      <div class="site-logo">
-        <span class="site-logo-dot"></span>
-        <span>Wandrille Fernex de Mongex</span>
+  <div class="shell">
+    <!-- BARRE SUPÉRIEURE -->
+    <header class="top-bar">
+      <div class="brand">WANDRILLE · PORTFOLIO</div>
+      <div class="actions">
+        <a class="btn btn--accent" href="mailto:wandrille.fm@gmail.com">Contact</a>
+        <a class="btn" href="https://instagram.com/ton_insta" target="_blank">Instagram</a>
+        <button class="btn" id="random-btn">Random</button>
       </div>
-      <nav class="site-nav-links">
-        <a href="#portfolio" class="nav-link">Portfolio</a>
-        <a href="#apropos" class="nav-link">À propos</a>
-        <a href="mailto:wandrille.fm@gmail.com" class="nav-link nav-link--primary">Contacter</a>
-      </nav>
     </header>
 
-    <main class="hero-shell">
-      <!-- LEFT -->
-      <section class="hero-card" id="apropos">
-        <div class="hero-inner">
-          <div>
-            <div class="hero-kicker">
-              <span class="hero-kicker-tag">Chambéry · FR</span>
-              <span>Design & Front-end dev</span>
-            </div>
-          </div>
-
-          <div>
-            <h1 class="hero-title">
-              Création d' <span class="accent">identités visuelles</span> pour vos projets.
-            </h1>
-          </div>
-
-          <p class="hero-sub">
-            Passionné d'<b>art</b> et plus particulièrement de <b>graphisme, programmation et musique</b>.
-          </p>
-
-          <div class="hero-meta">
-            <div class="meta-pill">
-              <span class="meta-dot"></span>
-              Design
-            </div>
-            <div class="meta-pill">
-              <span class="meta-dot"></span>
-              Front-end
-            </div>
-            <div class="meta-pill">
-              <span class="meta-dot"></span>
-              Identité visuelle
-            </div>
-          </div>
-
-          <p class="hero-note">
-            [À propos]
-          </p>
+    <!-- GRID D'IMAGES (6 PROJETS) -->
+    <main class="grid" id="grid">
+      <!-- Projet 1 -->
+      <article
+        class="card"
+        data-title="Scoutisme – tradiscout"
+        data-type="Rebranding · e‑commerce"
+        data-link="https://example.com/tradiscout"
+        data-image="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=900');">
         </div>
-      </section>
-
-      <!-- RIGHT -->
-      <section class="hero-card" id="portfolio">
-        <div class="hero-inner">
-          <div class="hero-right-header">
-            <span>sélection de séries</span>
-            
-            </button>
-          </div>
-
-          <div class="hero-list">
-            <!-- PROJET 1 -->
-            <article class="project-row"
-                     data-images="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800,
-                                  https://images.pexels.com/photos/1444443/pexels-photo-1444443.jpeg?auto=compress&cs=tinysrgb&w=800,
-                                  https://images.pexels.com/photos/1444444/pexels-photo-1444444.jpeg?auto=compress&cs=tinysrgb&w=800">
-              <div class="project-main">
-                <div class="project-title">Scoutisme - tradiscout</div>
-                <div class="project-sub">Un rebranding complet, des couleurs jusqu'à la typo.</div>
-                <div class="project-meta">
-                  <span class="project-tag">Figma</span>
-                  <span class="project-tag">Affinity</span>
-                  <span class="project-tag">Kittl</span>
-                  <span class="project-tag">Github</span>
-                  <span class="project-tag">Stripe</span>
-                </div>
-              </div>
-              <div
-                class="project-thumb"
-                style="background-image:url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=800');">
-              </div>
-              <div class="project-arrow">↗</div>
-            </article>
-
-            <!-- PROJET 2 -->
-            <article class="project-row"
-                     data-images="Capture d'écran 2026-01-08 130409.png">
-              <div class="project-main">
-                <div class="project-title">Photographie - De la Chapelle</div>
-                <div class="project-sub">Présentation et showcase de photos et de tarifs.</div>
-                <div class="project-meta">
-                  <span class="project-tag">Figma</span>
-                  <span class="project-tag">Github</span>
-                  <span class="project-tag">Affinity</span>
-                </div>
-              </div>
-              <div
-                class="project-thumb"
-                style="background-image:url('https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=800');">
-              </div>
-              <div class="project-arrow">↗</div>
-            </article>
-
-            <!-- PROJET 3 -->
-            <article class="project-row"
-                     data-images="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=800,
-                                  https://images.pexels.com/photos/1648375/pexels-photo-1648375.jpeg?auto=compress&cs=tinysrgb&w=800">
-              <div class="project-main">
-                <div class="project-title">Photographie - Soazig de Kermenguy</div>
-                <div class="project-sub">Présentation et portfolio.</div>
-                <div class="project-meta">
-                  <span class="project-tag">Github</span>
-                  <span class="project-tag">Pixieset</span>
-                  <span class="project-tag">Figma</span>
-                </div>
-              </div>
-              <div
-                class="project-thumb"
-                style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=800');">
-              </div>
-              <div class="project-arrow">↗</div>
-            </article>
-          </div>
-
-          <p class="hero-note">
-            [Projets]
-          </p>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Scoutisme – tradiscout</div>
+          <div>Branding · boutique en ligne</div>
         </div>
-      </section>
+      </article>
+
+      <!-- Projet 2 -->
+      <article
+        class="card"
+        data-title="Photographie – De la Chapelle"
+        data-type="Portfolio · vitrine"
+        data-link="https://example.com/delachapelle"
+        data-image="https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/2959192/pexels-photo-2959192.jpeg?auto=compress&cs=tinysrgb&w=900');">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Photographie – De la Chapelle</div>
+          <div>Site vitrine</div>
+        </div>
+      </article>
+
+      <!-- Projet 3 -->
+      <article
+        class="card"
+        data-title="Photographie – Soazig de Kermenguy"
+        data-type="Portfolio · prestations"
+        data-link="https://example.com/soazig"
+        data-image="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900');">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Photographie – Soazig de Kermenguy</div>
+          <div>Portfolio photo</div>
+        </div>
+      </article>
+
+      <!-- Projet 4 -->
+      <article
+        class="card"
+        data-title="Série argentique – Alpes"
+        data-type="Série photo · personnel"
+        data-link="#"
+        data-image="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=900');">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Série argentique – Alpes</div>
+          <div>Photographie</div>
+        </div>
+      </article>
+
+      <!-- Projet 5 -->
+      <article
+        class="card"
+        data-title="Affiches · Events scouts"
+        data-type="Graphisme · print"
+        data-link="#"
+        data-image="https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=900');">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Affiches · Events scouts</div>
+          <div>Affichage / print</div>
+        </div>
+      </article>
+
+      <!-- Projet 6 -->
+      <article
+        class="card"
+        data-title="Interface · Dashboard photo"
+        data-type="UI · expérimentation"
+        data-link="#"
+        data-image="https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=900">
+        <div class="card-image"
+          style="background-image:url('https://images.pexels.com/photos/196645/pexels-photo-196645.jpeg?auto=compress&cs=tinysrgb&w=900');">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-info">
+          <div class="card-title">Interface · Dashboard photo</div>
+          <div>UI design</div>
+        </div>
+      </article>
     </main>
 
-    <footer class="site-footer" id="contact">
-      <div class="footer-pill">
-        <span class="meta-dot"></span>
-        Ouvert même aux idées les plus folles
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-left">
+        © <span id="year"></span> Wandrille Fernex de Mongex
       </div>
-      <div class="footer-pill">
-        <span>Contact :</span>
-        <a href="mailto:wandrille.fm@gmail.com">wandrille.fm@gmail.com</a>
+      <div class="footer-right">
+        <a href="mailto:wandrille.fm@gmail.com">Email</a>
+        <span>·</span>
+        <a href="https://instagram.com/ton_insta" target="_blank">Instagram</a>
+        <span>·</span>
+        <span>Chambéry · FR</span>
       </div>
     </footer>
   </div>
 
-  <!-- MODAL -->
-  <!-- MODAL SANS BULLES -->
-<div class="modal-backdrop" id="project-modal">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>Détail du projet</span>
-      <button class="modal-close" type="button" aria-label="Fermer">✕</button>
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-image" id="lb-image"></div>
+      <div class="lightbox-meta">
+        <div class="lightbox-meta-top">
+          <div class="lightbox-title" id="lb-title"></div>
+          <div id="lb-type"></div>
+        </div>
+        <div class="lightbox-buttons">
+          <a class="btn btn--accent" id="lb-view" href="#" target="_blank">Voir le projet</a>
+          <a class="btn" href="mailto:wandrille.fm@gmail.com">Me contacter</a>
+        </div>
+      </div>
     </div>
-    <div class="modal-image" id="modal-image">
-      <div class="modal-counter" id="modal-counter">1 / 1</div>
-    </div>
-    <div class="modal-body">
-      <h2 class="modal-title" id="modal-title"></h2>
-      <p class="modal-sub" id="modal-sub"></p>
-      <div class="modal-tags" id="modal-tags"></div>
-    </div>
+    <div class="lightbox-close" id="lb-close">✕</div>
   </div>
-</div>
-
 
   <script>
-    const modal = document.getElementById("project-modal");
-    const modalImage = document.getElementById("modal-image");
-    const modalTitle = document.getElementById("modal-title");
-    const modalSub = document.getElementById("modal-sub");
-    const modalTags = document.getElementById("modal-tags");
-    const closeBtn = modal.querySelector(".modal-close");
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const lightbox = document.getElementById("lightbox");
+    const lbImage = document.getElementById("lb-image");
+    const lbTitle = document.getElementById("lb-title");
+    const lbType = document.getElementById("lb-type");
+    const lbView = document.getElementById("lb-view");
+    const lbClose = document.getElementById("lb-close");
+    const randomBtn = document.getElementById("random-btn");
 
-    const modalPrev = document.getElementById("modal-prev");
-    const modalNext = document.getElementById("modal-next");
-    const modalCounter = document.getElementById("modal-counter");
+    function openLightbox(card) {
+      const img = card.dataset.image;
+      const title = card.dataset.title;
+      const type = card.dataset.type;
+      const link = card.dataset.link || "#";
 
-    let currentGallery = [];
-    let currentIndex = 0;
-
-    function updateModalImage() {
-      if (!currentGallery.length) return;
-      const url = currentGallery[currentIndex];
-      modalImage.style.backgroundImage = `url("${url}")`;
-      if (modalCounter) {
-        modalCounter.textContent = (currentIndex + 1) + " / " + currentGallery.length;
-      }
+      lbImage.style.backgroundImage = img ? `url("${img}")` : "none";
+      lbTitle.textContent = title || "";
+      lbType.textContent = type || "";
+      lbView.href = link;
+      lightbox.classList.add("is-open");
     }
 
-    function openModalFromProject(projectRow) {
-      const title = projectRow.querySelector(".project-title")?.textContent || "";
-      const sub = projectRow.querySelector(".project-sub")?.textContent || "";
-      const tags = projectRow.querySelectorAll(".project-tag");
-
-      // récupère la liste des images depuis data-images
-      const dataImages = projectRow.getAttribute("data-images") || "";
-      currentGallery = dataImages
-        .split(",")
-        .map(s => s.trim())
-        .filter(Boolean);
-
-      // fallback : si pas de data-images, on prend le background de la thumb
-      if (!currentGallery.length) {
-        const thumb = projectRow.querySelector(".project-thumb");
-        if (thumb) {
-          const style = window.getComputedStyle(thumb);
-          const bgImg = style.backgroundImage;
-          const urlMatch = bgImg.match(/url\((\"|')?(.*?)(\"|')?\)/);
-          const url = urlMatch ? urlMatch[2] : "";
-          if (url) currentGallery = [url];
-        }
-      }
-
-      currentIndex = 0;
-      updateModalImage();
-
-      modalTitle.textContent = title;
-      modalSub.textContent = sub;
-
-      modalTags.innerHTML = "";
-      tags.forEach(tag => {
-        const span = document.createElement("span");
-        span.className = "modal-tag";
-        span.textContent = tag.textContent;
-        modalTags.appendChild(span);
-      });
-
-      modal.classList.add("is-open");
-    }
-
-    function closeModal() {
-      modal.classList.remove("is-open");
-      currentGallery = [];
-      currentIndex = 0;
-    }
-
-    function showNext() {
-      if (!currentGallery.length) return;
-      currentIndex = (currentIndex + 1) % currentGallery.length;
-      updateModalImage();
-    }
-
-    function showPrev() {
-      if (!currentGallery.length) return;
-      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-      updateModalImage();
-    }
-
-    document.querySelectorAll(".project-row").forEach(row => {
-      row.addEventListener("click", () => openModalFromProject(row));
+    cards.forEach(card => {
+      card.addEventListener("click", () => openLightbox(card));
     });
 
-    closeBtn.addEventListener("click", closeModal);
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        closeModal();
-      }
+    lbClose.addEventListener("click", () => lightbox.classList.remove("is-open"));
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.classList.remove("is-open");
     });
-
-    // clic sur l'image = next
-    modalImage.addEventListener("click", (e) => {
-      // ne pas déclencher si clic sur les flèches
-      if (e.target === modalPrev || e.target === modalNext) return;
-      showNext();
-    });
-
-    modalNext.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showNext();
-    });
-
-    modalPrev.addEventListener("click", (e) => {
-      e.stopPropagation();
-      showPrev();
-    });
-
     document.addEventListener("keydown", (e) => {
-      if (!modal.classList.contains("is-open")) return;
-      if (e.key === "Escape") {
-        closeModal();
-      }
-      if (e.key === "ArrowRight") {
-        showNext();
-      }
-      if (e.key === "ArrowLeft") {
-        showPrev();
-      }
+      if (e.key === "Escape") lightbox.classList.remove("is-open");
     });
+
+    randomBtn.addEventListener("click", () => {
+      if (!cards.length) return;
+      const idx = Math.floor(Math.random() * cards.length);
+      openLightbox(cards[idx]);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
