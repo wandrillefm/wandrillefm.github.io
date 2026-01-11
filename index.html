@@ -13,7 +13,7 @@
       --accent: #f5f5f5;
       --card-bg: #101010;
       --border-subtle: rgba(255,255,255,0.06);
-      --gap: 12px;
+      --gap: 22px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,49 +23,62 @@
       font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
       background: radial-gradient(circle at top, #151515 0, transparent 55%), var(--bg);
       color: var(--fg);
-      padding: 18px 18px 32px;
+      padding: 32px 24px 40px;
     }
 
     a { color: inherit; text-decoration: none; }
 
     .shell {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 28px;
     }
 
     /* TOP BAR */
 
     .top-bar {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      gap: 12px;
+      gap: 18px;
       flex-wrap: wrap;
+      padding-bottom: 16px;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 10px;
     }
 
     .brand {
-      font-size: 13px;
-      letter-spacing: 0.18em;
+      font-size: 14px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
       white-space: nowrap;
     }
 
+    .tagline {
+      font-size: 13px;
+      color: var(--fg);
+      opacity: 0.8;
+    }
+
+    .top-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
     .actions {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .btn {
       border-radius: 999px;
       border: 1px solid var(--border-subtle);
-      padding: 5px 11px;
+      padding: 7px 14px;
       font-size: 11px;
       color: var(--fg);
       background: transparent;
@@ -83,7 +96,7 @@
     }
 
     .btn:hover {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.05);
       transform: translateY(-0.5px);
     }
 
@@ -91,90 +104,90 @@
       background: #ffffff;
     }
 
-    /* GRID (3:4) */
+    /* SECTION TITRE GRID */
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      font-size: 16px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fg);
+    }
+
+    /* GRID */
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--gap);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+      gap: 50px;
+      padding-top: 4px;
     }
 
     .card {
       position: relative;
       background: var(--card-bg);
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
       border: 1px solid var(--border-subtle);
-      aspect-ratio: 3/4;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
     }
 
     .card-image {
-      position: absolute;
-      inset: 0;
+      flex: 1;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       transition: transform 180ms ease-out, filter 180ms ease-out;
-      filter: grayscale(100%) contrast(1.05);
+      filter: contrast(1.03) saturate(1.02);
     }
 
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 50%);
-      opacity: 0;
-      transition: opacity 160ms ease-out;
-    }
-
-    .card-info {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
+    .card-meta {
+      padding: 10px 12px 11px;
       display: flex;
       flex-direction: column;
       gap: 3px;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 160ms ease-out, transform 160ms ease-out;
+      border-top: 1px solid var(--border-subtle);
     }
 
     .card-title {
-      font-size: 11px;
-      letter-spacing: 0.12em;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--fg);
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: var(--muted);
     }
 
     .card:hover .card-image {
       transform: scale(1.03);
-      filter: grayscale(100%) contrast(1.1) brightness(1.02);
-    }
-
-    .card:hover .card-overlay {
-      opacity: 1;
-    }
-
-    .card:hover .card-info {
-      opacity: 1;
-      transform: translateY(0);
+      filter: contrast(1.08) saturate(1.06) brightness(1.02);
     }
 
     /* FOOTER */
 
     .footer {
-      margin-top: 10px;
-      padding-top: 10px;
+      margin-top: 8px;
+      padding-top: 16px;
       border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      font-size: 10px;
+      gap: 10px;
+      font-size: 11px;
       color: var(--muted);
       flex-wrap: wrap;
     }
@@ -182,7 +195,7 @@
     .footer-right {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -195,7 +208,7 @@
       text-decoration: underline;
     }
 
-    /* LIGHTBOX */
+    /* LIGHTBOX MULTI-IMAGES */
 
     .lightbox {
       position: fixed;
@@ -205,51 +218,100 @@
       align-items: center;
       justify-content: center;
       z-index: 50;
-      padding: 16px;
+      padding: 24px;
     }
 
     .lightbox.is-open { display: flex; }
 
     .lightbox-inner {
-      max-width: 900px;
+      max-width: 960px;
       width: 100%;
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 1.4fr);
-      gap: 16px;
+      gap: 24px;
       align-items: stretch;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid var(--border-subtle);
       background: #050505;
-      padding: 12px;
+      padding: 18px;
+    }
+
+    .lightbox-image-wrapper {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
     .lightbox-image {
-      border-radius: 8px;
+      border-radius: 10px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       aspect-ratio: 16/9;
-      filter: grayscale(100%) contrast(1.05);
+      filter: contrast(1.03) saturate(1.02);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .lightbox-arrow {
+      pointer-events: auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg);
+      font-size: 14px;
+      cursor: pointer;
+      margin: 0 8px;
+      transition: background 140ms ease-out, transform 120ms ease-out;
+    }
+
+    .lightbox-arrow:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-0.5px);
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.6);
+      color: var(--fg);
     }
 
     .lightbox-meta {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
-      font-size: 11px;
+      gap: 18px;
+      font-size: 12px;
       color: var(--muted);
     }
 
     .lightbox-meta-top {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
 
     .lightbox-title {
-      font-size: 13px;
-      letter-spacing: 0.18em;
+      font-size: 15px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--fg);
     }
@@ -257,13 +319,13 @@
     .lightbox-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
     .lightbox-close {
       position: fixed;
-      top: 14px;
-      right: 18px;
+      top: 20px;
+      right: 26px;
       font-size: 18px;
       cursor: pointer;
       color: var(--muted);
@@ -277,33 +339,37 @@
       color: var(--fg);
     }
 
-    @media (max-width: 640px) {
-      .lightbox-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .lightbox-image {
-        aspect-ratio: 16 / 10;
-      }
-    }
-
     /* RESPONSIVE */
 
     @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      body {
+        padding: 24px 16px 28px;
+      }
+
+      .shell {
+        gap: 24px;
+      }
+
+      .lightbox-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lightbox-image {
+        aspect-ratio: 3/4;
+      }
+
+      .top-bar {
+        align-items: flex-start;
+      }
+
+      .top-right {
+        align-items: flex-start;
       }
     }
 
     @media (max-width: 640px) {
-      body { padding-inline: 12px; }
       .grid {
-        grid-template-columns: 1fr;
-      }
-      .lightbox-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .lightbox-image {
-        aspect-ratio: 3 / 4;
+        justify-content: center;
       }
     }
   </style>
@@ -312,112 +378,104 @@
   <div class="shell">
     <!-- BARRE SUPÉRIEURE -->
     <header class="top-bar">
-      <div class="brand">WANDRILLE · PORTFOLIO</div>
-      <div class="actions">
-        <a class="btn btn--accent" href="mailto:wandrille.fm@gmail.com">Contact</a>
-        <a class="btn" href="https://instagram.com/wandrille.fm" target="_blank">Instagram</a>
+      <div>
+        <div class="brand">WANDRILLE · PORTFOLIO</div>
+        <div class="tagline">UI, identités visuelles & portfolios pour créatifs.</div>
+      </div>
+      <div class="top-right">
+        <div class="actions">
+          <a class="btn btn--accent" href="mailto:wandrille.fm@gmail.com">Contact</a>
+          <a class="btn" href="https://instagram.com/wandrille.fm" target="_blank">Instagram</a>
+        </div>
       </div>
     </header>
 
+    <div class="section-header">
+      <div class="section-title">Projets</div>
+      <div>Une sélection récente · 6 projets</div>
+    </div>
+
     <!-- GRID D'IMAGES (6 PROJETS) -->
     <main class="grid" id="grid">
-      <!-- Projet 1 -->
       <article
         class="card"
         data-title="Wandrille"
         data-type="Designer"
         data-link="#"
-        data-image="Frame 3.png">
-        <div class="card-image" style="background-image:url('Frame 2.png');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+        data-images='["Frame 3.png"]'>
+        <div class="card-image" style="background-image:url('Frame 2.png');"></div>
+        <div class="card-meta">
           <div class="card-title">Présentation</div>
-          <div>A propos de moi</div>
+          <div class="card-sub">À propos de moi</div>
         </div>
       </article>
 
-      <!-- Projet 2 -->
       <article
         class="card"
         data-title="De la Chapelle"
         data-type="UI, rebranding, typo et couleurs"
         data-link="https://carldelachapelle.github.io"
-        data-image="Capture d'écran DeLaChapelle.png">
+        data-images='["Capture d&#39;écran DeLaChapelle.png","Capture d&#39;écran DeLaChapelle-detail1.png","Capture d&#39;écran DeLaChapelle-detail2.png"]'>
         <div class="card-image"
-          style="background-image:url('Capture d\'écran DeLaChapelle.png');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+          style="background-image:url('Capture d\'écran DeLaChapelle.png');"></div>
+        <div class="card-meta">
           <div class="card-title">Carl De la Chapelle</div>
-          <div>Portfolio</div>
+          <div class="card-sub">Portfolio</div>
         </div>
       </article>
 
-      <!-- Projet 3 -->
       <article
         class="card"
         data-title="Soazig de Kermenguy"
         data-type="UI, typo et couleurs"
         data-link="https://soazigdekermenguy.github.io"
-        data-image="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900">
+        data-images='["https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900"]'>
         <div class="card-image"
-          style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+          style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900');"></div>
+        <div class="card-meta">
           <div class="card-title">Soazig de Kermenguy</div>
-          <div>Portfolio</div>
+          <div class="card-sub">Portfolio</div>
         </div>
       </article>
 
-      <!-- Projet 4 -->
       <article
         class="card"
         data-title="SJMV"
         data-type="Design, visuels"
         data-link="#"
-        data-image="Capture d'écran SJMV Figma.png">
+        data-images='["Capture d&#39;écran SJMV Figma.png"]'>
         <div class="card-image"
-          style="background-image:url('Capture d\'écran SJMV Figma.png');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+          style="background-image:url('Capture d\'écran SJMV Figma.png');"></div>
+        <div class="card-meta">
           <div class="card-title">SJMV</div>
-          <div>Association</div>
+          <div class="card-sub">Association</div>
         </div>
       </article>
 
-      <!-- Projet 5 -->
       <article
         class="card"
         data-title="Vianney Photos"
         data-type="UI, visuels"
         data-link="#"
-        data-image="Capture d'écran VianneyPhotos.png">
+        data-images='["Capture d&#39;écran VianneyPhotos.png"]'>
         <div class="card-image"
-          style="background-image:url('Capture d\'écran VianneyPhotos.png');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+          style="background-image:url('Capture d\'écran VianneyPhotos.png');"></div>
+        <div class="card-meta">
           <div class="card-title">Vianney Photos</div>
-          <div>Portfolio</div>
+          <div class="card-sub">Portfolio</div>
         </div>
       </article>
 
-      <!-- Projet 6 -->
       <article
         class="card"
         data-title="Tradiscout"
         data-type="Rebranding, UI, visuels"
         data-link="https://tradiscout.github.io"
-        data-image="Capture d'écran Tradiscout.png">
-        <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');">
-        </div>
-        <div class="card-overlay"></div>
-        <div class="card-info">
+        data-images='["Capture d&#39;écran Tradiscout.png"]'>
+        <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');"></div>
+        <div class="card-meta">
           <div class="card-title">Tradiscout</div>
-          <div>Association</div>
+          <div class="card-sub">Association</div>
         </div>
       </article>
     </main>
@@ -434,10 +492,17 @@
     </footer>
   </div>
 
-  <!-- LIGHTBOX -->
+  <!-- LIGHTBOX MULTI-IMAGES -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-inner">
-      <div class="lightbox-image" id="lb-image"></div>
+      <div class="lightbox-image-wrapper">
+        <div class="lightbox-image" id="lb-image"></div>
+        <div class="lightbox-nav">
+          <button class="lightbox-arrow" id="lb-prev" type="button">‹</button>
+          <button class="lightbox-arrow" id="lb-next" type="button">›</button>
+        </div>
+        <div class="lightbox-counter" id="lb-counter">1 / 1</div>
+      </div>
       <div class="lightbox-meta">
         <div class="lightbox-meta-top">
           <div class="lightbox-title" id="lb-title"></div>
@@ -460,15 +525,39 @@
     const lbType = document.getElementById("lb-type");
     const lbView = document.getElementById("lb-view");
     const lbClose = document.getElementById("lb-close");
+    const lbPrev = document.getElementById("lb-prev");
+    const lbNext = document.getElementById("lb-next");
+    const lbCounter = document.getElementById("lb-counter");
     const randomBtn = document.getElementById("random-btn");
 
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function updateLightboxImage() {
+      if (!currentImages.length) return;
+      const url = currentImages[currentIndex];
+      lbImage.style.backgroundImage = url ? `url("${url}")` : "none";
+      lbCounter.textContent = (currentIndex + 1) + " / " + currentImages.length;
+    }
+
     function openLightbox(card) {
-      const img = card.dataset.image;
       const title = card.dataset.title;
       const type = card.dataset.type;
       const link = card.dataset.link || "#";
 
-      lbImage.style.backgroundImage = img ? `url("${img}")` : "none";
+      try {
+        const raw = card.dataset.images || "[]";
+        currentImages = JSON.parse(raw);
+      } catch {
+        currentImages = [];
+      }
+      if (!currentImages.length && card.dataset.image) {
+        currentImages = [card.dataset.image];
+      }
+
+      currentIndex = 0;
+      updateLightboxImage();
+
       lbTitle.textContent = title || "";
       lbType.textContent = type || "";
       lbView.href = link;
@@ -485,7 +574,25 @@
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") lightbox.classList.remove("is-open");
+      if (!lightbox.classList.contains("is-open")) return;
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
     });
+
+    function nextImage() {
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateLightboxImage();
+    }
+
+    function prevImage() {
+      if (!currentImages.length) return;
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateLightboxImage();
+    }
+
+    lbNext.addEventListener("click", nextImage);
+    lbPrev.addEventListener("click", prevImage);
 
     if (randomBtn) {
       randomBtn.addEventListener("click", () => {
