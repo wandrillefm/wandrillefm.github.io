@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wandrille – Portfolio</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --bg: #050509;
-      --fg: #f5f5f7;
-      --muted: #9f9fb5;
-      --accent: #1db954;
-      --card-bg: #111119;
+      --bg: #050505;
+      --fg: #f5f5f5;
+      --muted: #9a9a9a;
+      --accent: #f5f5f5;
+      --card-bg: #101010;
+      --border-subtle: rgba(255,255,255,0.06);
       --gap: 12px;
     }
 
@@ -23,10 +20,10 @@
 
     body {
       min-height: 100vh;
-      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #181828 0, transparent 55%), var(--bg);
+      font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+      background: radial-gradient(circle at top, #151515 0, transparent 55%), var(--bg);
       color: var(--fg);
-      padding: 16px 16px 28px;
+      padding: 18px 18px 32px;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -36,7 +33,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
     /* TOP BAR */
@@ -47,13 +44,16 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
     }
 
     .brand {
-      font-size: 14px;
-      letter-spacing: 0.14em;
+      font-size: 13px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
+      white-space: nowrap;
     }
 
     .actions {
@@ -64,15 +64,16 @@
 
     .btn {
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--border-subtle);
       padding: 5px 11px;
       font-size: 11px;
       color: var(--fg);
-      background: rgba(8,8,16,0.9);
+      background: transparent;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      transition: background 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out, transform 120ms ease-out;
     }
 
     .btn--accent {
@@ -82,11 +83,15 @@
     }
 
     .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-0.5px);
     }
 
-    /* GRID 3 COLONNES (3:4) */
+    .btn--accent:hover {
+      background: #ffffff;
+    }
+
+    /* GRID (3:4) */
 
     .grid {
       display: grid;
@@ -97,11 +102,10 @@
     .card {
       position: relative;
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.6);
+      border: 1px solid var(--border-subtle);
       aspect-ratio: 3/4;
     }
 
@@ -111,43 +115,44 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      transition: transform 200ms ease-out, filter 200ms ease-out, opacity 200ms ease-out;
+      transition: transform 180ms ease-out, filter 180ms ease-out;
+      filter: grayscale(100%) contrast(1.05);
     }
 
     .card-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 45%);
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 50%);
       opacity: 0;
-      transition: opacity 200ms ease-out;
+      transition: opacity 160ms ease-out;
     }
 
     .card-info {
       position: absolute;
-      left: 8px;
-      right: 8px;
-      bottom: 8px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      font-size: 10px;
+      gap: 3px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       color: var(--muted);
       opacity: 0;
-      transform: translateY(5px);
-      transition: opacity 200ms ease-out, transform 200ms ease-out;
+      transform: translateY(4px);
+      transition: opacity 160ms ease-out, transform 160ms ease-out;
     }
 
     .card-title {
-      font-size: 12px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.12em;
       color: var(--fg);
     }
 
     .card:hover .card-image {
-      transform: scale(1.04);
-      filter: brightness(1.03);
+      transform: scale(1.03);
+      filter: grayscale(100%) contrast(1.1) brightness(1.02);
     }
 
     .card:hover .card-overlay {
@@ -162,9 +167,9 @@
     /* FOOTER */
 
     .footer {
-      margin-top: 8px;
+      margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -195,7 +200,7 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,0,0,0.9);
       display: none;
       align-items: center;
       justify-content: center;
@@ -212,14 +217,19 @@
       grid-template-columns: minmax(0, 3fr) minmax(0, 1.4fr);
       gap: 16px;
       align-items: stretch;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: #050505;
+      padding: 12px;
     }
 
     .lightbox-image {
-      border-radius: 14px;
+      border-radius: 8px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       aspect-ratio: 16/9;
+      filter: grayscale(100%) contrast(1.05);
     }
 
     .lightbox-meta {
@@ -227,19 +237,19 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 14px;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--muted);
     }
 
     .lightbox-meta-top {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .lightbox-title {
-      font-size: 14px;
-      letter-spacing: 0.12em;
+      font-size: 13px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--fg);
     }
@@ -252,22 +262,29 @@
 
     .lightbox-close {
       position: fixed;
-      top: 12px;
-      right: 14px;
-      font-size: 20px;
+      top: 14px;
+      right: 18px;
+      font-size: 18px;
       cursor: pointer;
       color: var(--muted);
+      padding: 2px 4px;
+      border-radius: 999px;
+      transition: background 120ms ease-out, color 120ms ease-out;
     }
 
-@media (max-width: 640px) {
-  .lightbox-inner {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .lightbox-image {
-    aspect-ratio: 16 / 10; /* ou 3 / 4 si tu veux plus vertical */
-  }
-}
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--fg);
+    }
 
+    @media (max-width: 640px) {
+      .lightbox-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .lightbox-image {
+        aspect-ratio: 16 / 10;
+      }
+    }
 
     /* RESPONSIVE */
 
@@ -328,7 +345,7 @@
         data-link="https://carldelachapelle.github.io"
         data-image="Capture d'écran DeLaChapelle.png">
         <div class="card-image"
-        style="background-image:url('Capture d\'écran DeLaChapelle.png');">
+          style="background-image:url('Capture d\'écran DeLaChapelle.png');">
         </div>
         <div class="card-overlay"></div>
         <div class="card-info">
@@ -379,9 +396,8 @@
         data-link="#"
         data-image="Capture d'écran VianneyPhotos.png">
         <div class="card-image"
-        style="background-image:url('Capture d\'écran VianneyPhotos.png');">
+          style="background-image:url('Capture d\'écran VianneyPhotos.png');">
         </div>
-
         <div class="card-overlay"></div>
         <div class="card-info">
           <div class="card-title">Vianney Photos</div>
@@ -471,11 +487,13 @@
       if (e.key === "Escape") lightbox.classList.remove("is-open");
     });
 
-    randomBtn.addEventListener("click", () => {
-      if (!cards.length) return;
-      const idx = Math.floor(Math.random() * cards.length);
-      openLightbox(cards[idx]);
-    });
+    if (randomBtn) {
+      randomBtn.addEventListener("click", () => {
+        if (!cards.length) return;
+        const idx = Math.floor(Math.random() * cards.length);
+        openLightbox(cards[idx]);
+      });
+    }
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
