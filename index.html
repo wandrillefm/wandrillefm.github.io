@@ -23,13 +23,13 @@
       font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace;
       background: radial-gradient(circle at top, #151515 0, transparent 55%), var(--bg);
       color: var(--fg);
-      padding: 32px 24px 40px;
+      padding: 32px 16px 40px;
     }
 
     a { color: inherit; text-decoration: none; }
 
     .shell {
-      max-width: 1120px;
+      max-width: 1000px; /* un peu plus centré que 1120 */
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -46,6 +46,7 @@
       flex-wrap: wrap;
       padding-bottom: 16px;
       border-bottom: 1px solid var(--border-subtle);
+      padding-inline: 30px; /* rapproche vers le centre */
     }
 
     .brand {
@@ -113,6 +114,7 @@
       gap: 12px;
       font-size: 12px;
       color: var(--muted);
+      padding-inline: 30px; /* un peu vers le centre */
     }
 
     .section-title {
@@ -129,6 +131,7 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
       gap: 50px;
       padding-top: 4px;
+      justify-content: center; /* centre les cartes quand il reste de la place */
     }
 
     .card {
@@ -190,6 +193,7 @@
       font-size: 11px;
       color: var(--muted);
       flex-wrap: wrap;
+      padding-inline: 30px; /* idem header */
     }
 
     .footer-right {
@@ -343,11 +347,17 @@
 
     @media (max-width: 900px) {
       body {
-        padding: 24px 16px 28px;
+        padding: 24px 12px 28px;
       }
 
       .shell {
         gap: 24px;
+      }
+
+      .top-bar,
+      .section-header,
+      .footer {
+        padding-inline: 18px;
       }
 
       .lightbox-inner {
@@ -372,6 +382,10 @@
         justify-content: center;
       }
     }
+.lightbox-nav.is-hidden,
+.lightbox-counter.is-hidden {
+  display: none;
+}
   </style>
 </head>
 <body>
@@ -410,6 +424,7 @@
         </div>
       </article>
 
+      <!-- Projet 2 : exemple avec plusieurs images -->
       <article
         class="card"
         data-title="De la Chapelle"
@@ -424,6 +439,7 @@
         </div>
       </article>
 
+      <!-- Tu peux dupliquer le principe pour toutes les cartes -->
       <article
         class="card"
         data-title="Soazig de Kermenguy"
@@ -492,117 +508,130 @@
     </footer>
   </div>
 
-  <!-- LIGHTBOX MULTI-IMAGES -->
   <div class="lightbox" id="lightbox">
-    <div class="lightbox-inner">
-      <div class="lightbox-image-wrapper">
-        <div class="lightbox-image" id="lb-image"></div>
-        <div class="lightbox-nav">
-          <button class="lightbox-arrow" id="lb-prev" type="button">‹</button>
-          <button class="lightbox-arrow" id="lb-next" type="button">›</button>
-        </div>
-        <div class="lightbox-counter" id="lb-counter">1 / 1</div>
+  <div class="lightbox-inner">
+    <div class="lightbox-image-wrapper">
+      <div class="lightbox-image" id="lb-image"></div>
+      <div class="lightbox-nav">
+        <button class="lightbox-arrow" id="lb-prev" type="button">‹</button>
+        <button class="lightbox-arrow" id="lb-next" type="button">›</button>
       </div>
-      <div class="lightbox-meta">
-        <div class="lightbox-meta-top">
-          <div class="lightbox-title" id="lb-title"></div>
-          <div id="lb-type"></div>
-        </div>
-        <div class="lightbox-buttons">
-          <a class="btn btn--accent" id="lb-view" href="#" target="_blank">Voir le projet</a>
-          <a class="btn" href="mailto:wandrille.fm@gmail.com">Me contacter</a>
-        </div>
+      <div class="lightbox-counter" id="lb-counter">1 / 1</div>
+    </div>
+    <div class="lightbox-meta">
+      <div class="lightbox-meta-top">
+        <div class="lightbox-title" id="lb-title"></div>
+        <div id="lb-type"></div>
+      </div>
+      <div class="lightbox-buttons">
+        <a class="btn btn--accent" id="lb-view" href="#" target="_blank">Voir le projet</a>
+        <a class="btn" href="mailto:wandrille.fm@gmail.com">Me contacter</a>
       </div>
     </div>
-    <div class="lightbox-close" id="lb-close">✕</div>
   </div>
+  <div class="lightbox-close" id="lb-close">✕</div>
+</div>
 
-  <script>
-    const cards = Array.from(document.querySelectorAll(".card"));
-    const lightbox = document.getElementById("lightbox");
-    const lbImage = document.getElementById("lb-image");
-    const lbTitle = document.getElementById("lb-title");
-    const lbType = document.getElementById("lb-type");
-    const lbView = document.getElementById("lb-view");
-    const lbClose = document.getElementById("lb-close");
-    const lbPrev = document.getElementById("lb-prev");
-    const lbNext = document.getElementById("lb-next");
-    const lbCounter = document.getElementById("lb-counter");
-    const randomBtn = document.getElementById("random-btn");
+<script>
+  const cards = Array.from(document.querySelectorAll(".card"));
+  const lightbox = document.getElementById("lightbox");
+  const lbImage = document.getElementById("lb-image");
+  const lbTitle = document.getElementById("lb-title");
+  const lbType = document.getElementById("lb-type");
+  const lbView = document.getElementById("lb-view");
+  const lbClose = document.getElementById("lb-close");
+  const lbPrev = document.getElementById("lb-prev");
+  const lbNext = document.getElementById("lb-next");
+  const lbCounter = document.getElementById("lb-counter");
+  const lbNav = document.querySelector(".lightbox-nav");
+  const randomBtn = document.getElementById("random-btn");
 
-    let currentImages = [];
-    let currentIndex = 0;
+  let currentImages = [];
+  let currentIndex = 0;
 
-    function updateLightboxImage() {
-      if (!currentImages.length) return;
-      const url = currentImages[currentIndex];
-      lbImage.style.backgroundImage = url ? `url("${url}")` : "none";
+  function updateLightboxImage() {
+    if (!currentImages.length) return;
+    const url = currentImages[currentIndex];
+    lbImage.style.backgroundImage = url ? `url("${url}")` : "none";
+
+    if (currentImages.length === 1) {
+      // cacher flèches + compteur
+      lbNav.classList.add("is-hidden");
+      lbCounter.classList.add("is-hidden");
+    } else {
+      // afficher flèches + compteur
+      lbNav.classList.remove("is-hidden");
+      lbCounter.classList.remove("is-hidden");
       lbCounter.textContent = (currentIndex + 1) + " / " + currentImages.length;
     }
+  }
 
-    function openLightbox(card) {
-      const title = card.dataset.title;
-      const type = card.dataset.type;
-      const link = card.dataset.link || "#";
+  function openLightbox(card) {
+    const title = card.dataset.title;
+    const type = card.dataset.type;
+    const link = card.dataset.link || "#";
 
-      try {
-        const raw = card.dataset.images || "[]";
-        currentImages = JSON.parse(raw);
-      } catch {
-        currentImages = [];
-      }
-      if (!currentImages.length && card.dataset.image) {
-        currentImages = [card.dataset.image];
-      }
-
-      currentIndex = 0;
-      updateLightboxImage();
-
-      lbTitle.textContent = title || "";
-      lbType.textContent = type || "";
-      lbView.href = link;
-      lightbox.classList.add("is-open");
+    try {
+      const raw = card.dataset.images || "[]";
+      currentImages = JSON.parse(raw);
+    } catch {
+      currentImages = [];
+    }
+    if (!currentImages.length && card.dataset.image) {
+      currentImages = [card.dataset.image];
     }
 
-    cards.forEach(card => {
-      card.addEventListener("click", () => openLightbox(card));
+    currentIndex = 0;
+    updateLightboxImage();
+
+    lbTitle.textContent = title || "";
+    lbType.textContent = type || "";
+    lbView.href = link;
+    lightbox.classList.add("is-open");
+  }
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => openLightbox(card));
+  });
+
+  lbClose.addEventListener("click", () => lightbox.classList.remove("is-open"));
+
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.classList.remove("is-open");
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") lightbox.classList.remove("is-open");
+    if (!lightbox.classList.contains("is-open")) return;
+    if (e.key === "ArrowRight") nextImage();
+    if (e.key === "ArrowLeft") prevImage();
+  });
+
+  function nextImage() {
+    if (currentImages.length <= 1) return;
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightboxImage();
+  }
+
+  function prevImage() {
+    if (currentImages.length <= 1) return;
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxImage();
+  }
+
+  lbNext.addEventListener("click", nextImage);
+  lbPrev.addEventListener("click", prevImage);
+
+  if (randomBtn) {
+    randomBtn.addEventListener("click", () => {
+      if (!cards.length) return;
+      const idx = Math.floor(Math.random() * cards.length);
+      openLightbox(cards[idx]);
     });
+  }
 
-    lbClose.addEventListener("click", () => lightbox.classList.remove("is-open"));
-    lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) lightbox.classList.remove("is-open");
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") lightbox.classList.remove("is-open");
-      if (!lightbox.classList.contains("is-open")) return;
-      if (e.key === "ArrowRight") nextImage();
-      if (e.key === "ArrowLeft") prevImage();
-    });
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
-    function nextImage() {
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      updateLightboxImage();
-    }
-
-    function prevImage() {
-      if (!currentImages.length) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      updateLightboxImage();
-    }
-
-    lbNext.addEventListener("click", nextImage);
-    lbPrev.addEventListener("click", prevImage);
-
-    if (randomBtn) {
-      randomBtn.addEventListener("click", () => {
-        if (!cards.length) return;
-        const idx = Math.floor(Math.random() * cards.length);
-        openLightbox(cards[idx]);
-      });
-    }
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
