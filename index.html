@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Wandrille – Portfolio</title>
+  <title>Wandrille – Portfolio Photo</title>
 
   <!-- Police titres : Kunatic (auto-hébergée) -->
   <style>
@@ -356,31 +356,35 @@
         <p class="type-label">Wandrille · UI/UX Design</p>
       </section>
 
-      <section class="cards-row">
-        <article class="card">
-          <div class="card-image" style="background-image:url('Capture d\'écran SJMV Figma.png');"></div>
-          <div class="desc">
-            UI designer et développeur front-end basé à Chambéry, spécialisé dans les identités visuelles et portfolios pour créatifs.
-          </div>
-        </article>
+<section class="cards-row">
+  <!-- 1 → PROJETS -->
+  <article class="card clickable" onclick="showPage('collection')">
+    <div class="card-image" style="background-image:url('Capture d\'écran SJMV Figma.png');"></div>
+    <div class="desc">
+      UI designer et développeur front-end basé à Chambéry, spécialisé dans les identités visuelles et portfolios pour créatifs.
+    </div>
+  </article>
 
-        <article class="card">
-          <div class="desc">
-            Photographie, design d’interface et direction artistique minimaliste, avec un goût pour le noir & blanc et les compositions épurées.
-          </div>
-          <div class="card-image" style="background-image:url('Capture d\'écran VianneyPhotos.png');"></div>
-        </article>
+  <!-- 2 → SERVICES -->
+  <article class="card clickable" onclick="showPage('categories')">
+    <div class="card-image" style="background-image:url('Capture d\'écran VianneyPhotos.png');"></div>
+    <div class="desc">
+      Photographie, design d’interface et direction artistique minimaliste, avec un goût pour le noir & blanc et les compositions épurées.
+    </div>
+  </article>
 
-        <article class="card">
-          <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Wandrille Fernex</p><p>Designer & intégrateur</p><p>Portfolios & identités</p>
-            </div>
-            <div class="card-info-right"><p>FR</p></div>
-          </div>
-        </article>
-      </section>
+  <!-- 3 → CONTACT -->
+  <article class="card clickable" onclick="showPage('contact')">
+    <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');"></div>
+    <div class="card-info">
+      <div class="card-info-left">
+        <p>Wandrille Fernex</p><p>Designer & intégrateur</p><p>Portfolios & identités</p>
+      </div>
+      <div class="card-info-right"><p>FR</p></div>
+    </div>
+  </article>
+</section>
+
     </section>
 
     <!-- PAGE PROJETS -->
