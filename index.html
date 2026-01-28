@@ -1,732 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <title>Wandrille – Portfolio Photo</title>
-
-  <!-- Police titres : Kunatic (auto-hébergée) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    @font-face {
-      font-family: "Kunatic";
-      src: url("Kunatic.woff2") format("woff2");
-      font-weight: 400;
-      font-style: normal;
-      font-display: swap;
-    }
-  </style>
-
-  <!-- Police texte -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #03051B;
-      --text: #f3e8d9;
-      --muted: #d9ccb7;
-      --card-bg: #111827;
-      --card-border: rgba(243,232,217,0.22);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: var(--bg);
-      height: 100vh;
-      width: 100vw;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: #050505;
+      color: #f5f5f5;
+      min-height: 100vh;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      font-family: "Hedvig Letters Sans", system-ui, sans-serif;
-      color: var(--text);
-      overflow: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    .artboard {
-      position: relative;
-      aspect-ratio: 1728 / 1117;
-      width: min(100vw, 100vh * 1728 / 1117);
-      height: 100%;
-      background: var(--bg);
-      overflow: hidden;
-    }
-
-    .artboard-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding: 3.5% 3.5%;
-      overflow: auto;
-      scrollbar-width: none;
-    }
-    .artboard-inner::-webkit-scrollbar { display: none; }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      font-size: 1.5vmin;
-      letter-spacing: 0.14em;
-      margin-bottom: 6%;
-      color: var(--text);
-    }
-
-    .top-left,
-    .top-right {
-      display: flex;
-      gap: 6vmin;
-    }
-
-    .top-link {
-      background: none;
-      border: none;
-      color: inherit;
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .top-link[data-page-active="true"] {
-      text-decoration: underline;
-    }
-
-    .page { display: none; }
-    .page.active { display: block; }
-
-    .title-row {
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      margin-bottom: 12%;
-      position: relative;
-      color: var(--text);
-    }
-
-    .main-title {
-      font-family: "Alfa Slab One", system-ui, serif;
-      letter-spacing: 0.03em;
-      font-size: 10vmin;
-      line-height: 0.9;
-      text-align: left;
-    }
-
-    .type-label {
-      font-family: "Hedvig Letters Sans", system-ui, sans-serif;
-      text-transform: uppercase;
-      font-size: 1.5vmin;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-align: right;
-      margin-left: auto;
-      color: var(--muted);
-    }
-
-    .cards-row {
+    .layout {
       display: grid;
-      grid-template-columns: repeat(3, 3fr);
-      gap: 3%;
-      margin-bottom: 30px;
-      margin-top: -40px;
-      align-items: start;
+      grid-template-columns: minmax(220px, 320px) 1fr;
+      width: 100%;
+      min-height: 100vh;
     }
 
-    /* carte large sur l'accueil */
-    #page-menu .card-large {
-      grid-column: span 2;
-    }
+    /* COLONNE GAUCHE */
 
-    .card {
+    .left {
+      border-right: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 100%;
-      aspect-ratio: 6/7;
-      background: transparent;
-      border-radius: 12px;
-      padding: 1.5vmin;
-      color: var(--text);
     }
 
-    .card-image {
-      aspect-ratio: 1/1;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border-radius: 0;
-      background-color: #020617;
-    }
-
-    .card-info {
+    .nav-vertical {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
       display: flex;
-      justify-content: space-between;
-      font-size: 1.7vmin;
-      margin-top: 0.8vmin;
-      color: var(--muted);
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      opacity: 0.7;
     }
 
-    .card-info-left p + p { margin-top: 0.1vmin; }
+    .nav-vertical a {
+      color: inherit;
+      text-decoration: none;
+      position: relative;
+    }
+    .nav-vertical a::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -0.4rem;
+      width: 1px;
+      height: 10px;
+      background: transparent;
+      transition: background 0.2s;
+    }
+    .nav-vertical a:hover::after {
+      background: #ffffff;
+    }
 
-    .desc {
-      font-size: 1.7vmin;
-      line-height: 1.6;
-      margin-top: 0.8vmin;
-      color: var(--muted);
+    .identity {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: 260px;
+    }
+
+    .identity-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .role {
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .intro {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .tags {
+      font-size: 0.75rem;
+      opacity: 0.8;
     }
 
     .footer {
-      font-size: 1.7vmin;
-      line-height: 1.6;
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1001;
-      color: var(--text);
-      padding: 0.5vmin 2vmin;
-      text-align: center;
-      letter-spacing: 0.1em;
-      mix-blend-mode: difference;
+      font-size: 0.7rem;
+      opacity: 0.6;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(3, 5, 27, 0.9);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
+    /* COLONNE DROITE */
 
-    .lightbox.active { display: flex; }
-
-    .lightbox-content {
-      background: #0b1024;
-      padding: 4vmin;
-      max-width: 120vmin;
-      height: 60vmin;
-      position: relative;
-      display: flex;
-      gap: 3vmin;
-      color: var(--text);
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
-    }
-
-    @media (max-width: 768px) {
-      .lightbox-content {
-        flex-direction: column;
-        height: auto;
-        max-height: 80vh;
-        overflow-y: auto;
-      }
-
-      .lightbox-image {
-        width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 1/1;
-      }
-
-      .lightbox-text {
-        width: 100% !important;
-      }
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 2vmin;
-      right: 2vmin;
-      background: none;
-      border: none;
-      font-size: 3vmin;
-      cursor: pointer;
-      color: var(--text);
-      font-family: inherit;
-      z-index: 10;
-    }
-
-    .lightbox-image {
-      height: 100%;
-      aspect-ratio: 1/1;
-      background: #020617;
-      background-size: cover;
-      background-position: center;
-      flex-shrink: 0;
-      border-radius: 10px;
-    }
-
-    .lightbox-text {
-      flex: 1;
+    .right {
+      padding: 2rem;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      padding-right: 2vmin;
+      gap: 1.5rem;
     }
 
-    .lightbox-description {
-      margin-top: auto;
-      margin-bottom: 5px;
-      font-size: 1.7vmin;
-      color: var(--muted);
-    }
-
-    .lightbox-description p {
-      margin: 0;
-    }
-
-    .lightbox-info-top { margin-top: 0; }
-
-    .lightbox-title {
-      font-size: 2.7vmin;
-      margin-bottom: 1vmin;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .lightbox-details {
-      font-size: 1.7vmin;
-      line-height: 1.6;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .lightbox-details p { margin-bottom: 0.5vmin; }
-
-    .lightbox-nav {
+    .right-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-top: 1.5vmin;
-      font-size: 1.4vmin;
-      color: var(--muted);
+      align-items: center;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.7;
     }
 
-    .lb-btn {
-      background: none;
-      border: 1px solid var(--card-border);
+    .carousel {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE */
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #333 0, #161616 40%, #050505 100%);
+      border-radius: 18px;
+      min-width: 260px;
+      max-width: 320px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    }
+
+    .card-image {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      filter: grayscale(100%);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover .card-image {
+      filter: grayscale(30%);
+      transform: scale(1.03);
+    }
+
+    .card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 40%);
+    }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+    .card-tagline {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .chip {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
       border-radius: 999px;
-      padding: 0.5vmin 1.4vmin;
-      color: var(--text);
-      font: inherit;
-      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 0.2rem 0.6rem;
+      align-self: flex-start;
+      opacity: 0.8;
     }
 
-    .lb-btn:hover {
-      background: rgba(243,232,217,0.08);
-    }
+    /* RESPONSIVE */
 
-    .card.clickable {
-      cursor: pointer;
-      transition: opacity 0.2s;
+    @media (max-width: 800px) {
+      body { display: block; }
+      .layout {
+        display: block;
+      }
+      .left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: center;
+      }
+      .nav-vertical {
+        writing-mode: horizontal-tb;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+      .identity {
+        max-width: 100%;
+      }
+      .right {
+        padding: 1.2rem 1rem 1.5rem;
+      }
+      .cards {
+        gap: 1rem;
+      }
+      .card {
+        min-width: 220px;
+      }
     }
-
-    .card.clickable:hover { opacity: 0.9; }
   </style>
 </head>
 <body>
+  <main class="layout">
+    <!-- COLONNE GAUCHE -->
+    <section class="left">
+      <div>
+        <nav class="nav-vertical">
+          <a href="#accueil">ACCUEIL</a>
+          <a href="#projets">PROJETS</a>
+          <a href="#services">SERVICES</a>
+          <a href="#contact">CONTACT</a>
+        </nav>
 
-<div class="artboard">
-  <div class="artboard-inner">
-
-    <!-- TOP BAR -->
-    <header class="top-bar">
-      <div class="top-left">
-        <button class="top-link" data-page-btn="menu" data-page-active="true">[ACCUEIL]</button>
-        <button class="top-link" data-page-btn="collection">[PROJETS]</button>
-        <button class="top-link" data-page-btn="categories">[SERVICES]</button>
+        <div class="identity" id="accueil">
+          <div class="identity-title">Portfolio</div>
+          <h1>WANDRILLE · UI/UX DESIGN</h1>
+          <p class="role">UI designer & développeur front-end</p>
+          <p class="intro">
+            UI designer et développeur front-end basé à Chambéry, spécialisé dans les identités visuelles et portfolios pour créatifs.
+          </p>
+          <p class="intro">
+            Photographie, design d’interface et direction artistique minimaliste, avec un goût pour le noir & blanc et les compositions épurées.
+          </p>
+          <p class="tags">
+            Wandrille Fernex · Designer & intégrateur · Portfolios & identités · FR
+          </p>
+        </div>
       </div>
-      <div class="top-right">
-        <button class="top-link" data-page-btn="contact">[CONTACT]</button>
-      </div>
-    </header>
 
-    <!-- PAGE ACCUEIL -->
-    <section class="page active" id="page-menu">
-      <section class="title-row">
-        <h1 class="main-title">Portfolio</h1>
-        <p class="type-label">Wandrille · UI/UX Design</p>
-      </section>
-
-<section class="cards-row">
-  <!-- 1 → PROJETS -->
-  <article class="card clickable" onclick="showPage('collection')">
-    <div class="card-image" style="background-image:url('Capture d\'écran SJMV Figma.png');"></div>
-    <div class="desc">
-      UI designer et développeur front-end basé à Chambéry, spécialisé dans les identités visuelles et portfolios pour créatifs.
-    </div>
-  </article>
-
-  <!-- 2 → SERVICES -->
-  <article class="card clickable" onclick="showPage('categories')">
-    <div class="card-image" style="background-image:url('Capture d\'écran VianneyPhotos.png');"></div>
-    <div class="desc">
-      Photographie, design d’interface et direction artistique minimaliste, avec un goût pour le noir & blanc et les compositions épurées.
-    </div>
-  </article>
-
-  <!-- 3 → CONTACT -->
-  <article class="card clickable" onclick="showPage('contact')">
-    <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');"></div>
-    <div class="card-info">
-      <div class="card-info-left">
-        <p>Wandrille Fernex</p><p>Designer & intégrateur</p><p>Portfolios & identités</p>
-      </div>
-      <div class="card-info-right"><p>FR</p></div>
-    </div>
-  </article>
-</section>
-
+      <footer class="footer">
+        © 2026 Wandrille.fm
+      </footer>
     </section>
 
-    <!-- PAGE PROJETS -->
-    <section class="page" id="page-collection">
-      <section class="title-row">
-        <h1 class="main-title">Projets</h1>
-        <p class="type-label">Quelques projets</p>
-      </section>
+    <!-- COLONNE DROITE -->
+    <section class="right">
+      <header class="right-header">
+        <span id="projets">Sélection de projets</span>
+        <span>Scroll horizontal</span>
+      </header>
 
-      <section class="cards-row">
-        <article class="card clickable" onclick="openProject('carl')">
-          <div class="card-image" style="background-image:url('Capture d\'écran DeLaChapelle.png');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Carl De la Chapelle</p><p>Portfolio photo</p><p>UI, rebranding</p>
+      <div class="carousel">
+        <div class="cards">
+          <!-- Carl de la Chapelle -->
+          <article class="card">
+            <div class="card-image"
+                 style="background-image:url('https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+              <div class="card-gradient"></div>
             </div>
-            <div class="card-info-right"><p>OUVRIR</p></div>
-          </div>
-        </article>
-
-        <article class="card clickable" onclick="openProject('soazig')">
-          <div class="card-image" style="background-image:url('https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=900');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Soazig de Kermenguy</p><p>Portfolio éditorial</p><p>UI, couleurs</p>
+            <div class="card-body">
+              <div class="card-title">Carl de la Chapelle</div>
+              <div class="card-meta">Portrait · Direction artistique</div>
+              <p class="card-tagline">
+                Série de portraits noir & blanc, lumière naturelle et cadrages serrés pour un rendu éditorial.
+              </p>
+              <div class="chip">Portraits</div>
             </div>
-            <div class="card-info-right"><p>OUVRIR</p></div>
-          </div>
-        </article>
+          </article>
 
-        <article class="card clickable" onclick="openProject('tradiscout')">
-          <div class="card-image" style="background-image:url('Capture d\'écran Tradiscout.png');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Tradiscout</p><p>Association</p><p>Rebranding, UI</p>
+          <!-- Tradiscout -->
+          <article class="card">
+            <div class="card-image"
+                 style="background-image:url('https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+              <div class="card-gradient"></div>
             </div>
-            <div class="card-info-right"><p>OUVRIR</p></div>
-          </div>
-        </article>
-
-        <article class="card clickable" onclick="openProject('vianney')">
-          <div class="card-image" style="background-image:url('Capture d\'écran VianneyPhotos.png');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Vianney Photos</p><p>Photographe mariage</p><p>Site lumineux</p>
+            <div class="card-body">
+              <div class="card-title">Tradiscout</div>
+              <div class="card-meta">Reportage · Événement</div>
+              <p class="card-tagline">
+                Reportages terrain pour un mouvement scout, capturant les moments de vie, les rites et la transmission.
+              </p>
+              <div class="chip">Reportage</div>
             </div>
-            <div class="card-info-right"><p>OUVRIR</p></div>
-          </div>
-        </article>
+          </article>
 
-        <article class="card clickable" onclick="openProject('wandrille')">
-          <div class="card-image" style="background-image:url('Frame 2.png');"></div>
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Wandrille</p><p>Portfolio perso</p><p>UI & photo</p>
+          <!-- SJMV -->
+          <article class="card">
+            <div class="card-image"
+                 style="background-image:url('https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+              <div class="card-gradient"></div>
             </div>
-            <div class="card-info-right"><p>OUVRIR</p></div>
-          </div>
-        </article>
-      </section>
-    </section>
-
-    <!-- PAGE SERVICES -->
-    <section class="page" id="page-categories">
-      <section class="title-row">
-        <h1 class="main-title">Services</h1>
-        <p class="type-label">Gagnez en attractivité</p>
-      </section>
-
-      <section class="cards-row">
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Portfolios</p><p>Sites statiques</p><p>Boutiques</p><p>Pages simples</p>
+            <div class="card-body">
+              <div class="card-title">SJMV</div>
+              <div class="card-meta">Documentaire · Vie communautaire</div>
+              <p class="card-tagline">
+                Images discrètes et contemplatives, centrées sur les gestes, les espaces et les temps forts liturgiques.
+              </p>
+              <div class="chip">Documentaire</div>
             </div>
-            <div class="card-info-right"><p>200 eur</p></div>
-          </div>
-        </article>
+          </article>
 
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Identités visuelles</p><p>Logos & palettes</p><p>Typographies</p><p>Contenu réseaux sociaux</p>
+          <!-- Vianney photo -->
+          <article class="card">
+            <div class="card-image"
+                 style="background-image:url('https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=1200');">
+              <div class="card-gradient"></div>
             </div>
-            <div class="card-info-right"><p>50 eur</p></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Autres idées??</p><p>Je suis partant!!</p>
+            <div class="card-body">
+              <div class="card-title">Vianney photo</div>
+              <div class="card-meta">UI/UX · Portfolio photo</div>
+              <p class="card-tagline">
+                Interface de portfolio pensée pour la lisibilité des séries et un parcours fluide entre les projets clients.
+              </p>
+              <div class="chip">Design & photo</div>
             </div>
-            <div class="card-info-right"><p>à voir</p></div>
-          </div>
-        </article>
-      </section>
-    </section>
-
-    <!-- PAGE BRIEF -->
-    <section class="page" id="page-commande">
-      <section class="title-row">
-        <h1 class="main-title">Brief</h1>
-        <p class="type-label">Projet à venir</p>
-      </section>
-      <section class="cards-row">
-        <article class="card">
-          <div class="desc">
-            Décrivez votre projet (type de photos, nombre de pages, deadline) et recevez une première proposition de structure.
-          </div>
-        </article>
-      </section>
-    </section>
-
-    <!-- PAGE CONTACT -->
-    <section class="page" id="page-contact">
-      <section class="title-row">
-        <h1 class="main-title">Contact</h1>
-        <p class="type-label">Parlons de votre projet</p>
-      </section>
-
-      <section class="cards-row">
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Email</p><p>wandrille.fm@gmail.com</p><p>Réponse sous 24h</p>
-            </div>
-            <div class="card-info-right"><p>@</p></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Instagram</p><p>@wandrille.fm</p><p>Work in progress</p>
-            </div>
-            <div class="card-info-right"><p>IG</p></div>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-info">
-            <div class="card-info-left">
-              <p>Ville</p><p>Chambéry · FR</p><p>Disponible à distance</p>
-            </div>
-            <div class="card-info-right"><p>FR</p></div>
-          </div>
-        </article>
-      </section>
-    </section>
-
-  </div>
-</div>
-
-<p class="footer">© 2026 Wandrille.fm</p>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-content">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <div class="lightbox-image" id="lightbox-image"></div>
-    <div class="lightbox-text">
-      <div class="lightbox-info-top">
-        <h2 class="lightbox-title" id="lightbox-title"></h2>
-        <div class="lightbox-details" id="lightbox-details"></div>
+          </article>
+        </div>
       </div>
-      <div class="lightbox-description" id="lightbox-description"></div>
-      <div class="lightbox-nav">
-        <button class="lb-btn" onclick="prevImage()">← Précédente</button>
-        <div id="lightbox-counter">1 / 1</div>
-        <button class="lb-btn" onclick="nextImage()">Suivante →</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<script>
-  const pages = {
-    menu: document.getElementById('page-menu'),
-    collection: document.getElementById('page-collection'),
-    categories: document.getElementById('page-categories'),
-    commande: document.getElementById('page-commande'),
-    contact: document.getElementById('page-contact'),
-  };
-
-  const buttons = document.querySelectorAll('[data-page-btn]');
-
-  function getTopButtonNameFromPage(pageName) {
-    return pageName;
-  }
-
-  function showPage(name) {
-    Object.values(pages).forEach(p => p && p.classList.remove('active'));
-    (pages[name] || pages.menu).classList.add('active');
-
-    const topName = getTopButtonNameFromPage(name);
-
-    buttons.forEach(b => {
-      const isTop = (b.dataset.pageBtn === topName);
-      b.dataset.pageActive = isTop ? 'true' : 'false';
-    });
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => showPage(btn.dataset.pageBtn));
-  });
-
-  const hash = window.location.hash.replace('#', '');
-  if (hash && pages[hash]) showPage(hash);
-  else showPage('menu');
-
-  // --- Lightbox multi-projets ---
-  const lightbox = document.getElementById('lightbox');
-  const lbImage = document.getElementById('lightbox-image');
-  const lbTitle = document.getElementById('lightbox-title');
-  const lbDetails = document.getElementById('lightbox-details');
-  const lbDesc = document.getElementById('lightbox-description');
-  const lbCounter = document.getElementById('lightbox-counter');
-
-  let projectImages = [];
-  let currentIndex = 0;
-
-  function openProject(key) {
-    if (key === 'carl') {
-      lbTitle.textContent = 'Carl De la Chapelle';
-      lbDetails.innerHTML = `
-        <p><strong>Projet:</strong> Portfolio photographe</p>
-        <p><strong>Rôle:</strong> UI, rebranding, intégration</p>
-      `;
-      lbDesc.innerHTML = `
-        <p>Refonte d’un portfolio photo avec grille épurée, navigation simple et focus sur les séries.</p>
-      `;
-      projectImages = [
-        "Capture d'écran DeLaChapelle.png",
-        "carl-2.png",
-        "carl-3.png"
-      ];
-    }
-
-    if (key === 'soazig') {
-      lbTitle.textContent = 'Soazig de Kermenguy';
-      lbDetails.innerHTML = `
-        <p><strong>Projet:</strong> Portfolio éditorial</p>
-        <p><strong>Rôle:</strong> UI, direction artistique</p>
-      `;
-      lbDesc.innerHTML = `
-        <p>Mise en page pensée pour de longues séries, palette douce et rythme typographique.</p>
-      `;
-      projectImages = [
-        "soazig-1.png",
-        "soazig-2.png",
-        "soazig-3.png"
-      ];
-    }
-
-    if (key === 'tradiscout') {
-      lbTitle.textContent = 'Tradiscout';
-      lbDetails.innerHTML = `
-        <p><strong>Projet:</strong> Site d’association</p>
-        <p><strong>Rôle:</strong> Rebranding, UI, intégration</p>
-      `;
-      lbDesc.innerHTML = `
-        <p>Refonte globale avec identité actualisée et hiérarchie claire des informations pratiques.</p>
-      `;
-      projectImages = [
-        "Capture d'écran Tradiscout.png",
-        "tradiscout-2.png",
-        "tradiscout-3.png"
-      ];
-    }
-
-    if (key === 'vianney') {
-      lbTitle.textContent = 'Vianney Photos';
-      lbDetails.innerHTML = `
-        <p><strong>Projet:</strong> Portfolio mariage</p>
-        <p><strong>Rôle:</strong> UI, intégration</p>
-      `;
-      lbDesc.innerHTML = `
-        <p>Site lumineux centré sur l’image, avec interface volontairement discrète et blocs plein écran.</p>
-      `;
-      projectImages = [
-        "Capture d'écran VianneyPhotos.png",
-        "vianney-2.png",
-        "vianney-3.png"
-      ];
-    }
-
-    if (key === 'wandrille') {
-      lbTitle.textContent = 'Wandrille – Portfolio';
-      lbDetails.innerHTML = `
-        <p><strong>Projet:</strong> Portfolio personnel</p>
-        <p><strong>Rôle:</strong> UI, dev front, photo</p>
-      `;
-      lbDesc.innerHTML = `
-        <p>Exploration de la cohabitation entre interface minimaliste et images fortes, avec un travail sur le contraste.</p>
-      `;
-      projectImages = [
-        "Frame 2.png",
-        "wandrille-2.png",
-        "wandrille-3.png"
-      ];
-    }
-
-    if (!projectImages.length) return;
-
-    currentIndex = 0;
-    updateLightboxImage();
-    lightbox.classList.add('active');
-  }
-
-  function updateLightboxImage() {
-    lbImage.style.backgroundImage = `url("${projectImages[currentIndex]}")`;
-    lbCounter.textContent = (currentIndex + 1) + " / " + projectImages.length;
-  }
-
-  function nextImage() {
-    if (!projectImages.length) return;
-    currentIndex = (currentIndex + 1) % projectImages.length;
-    updateLightboxImage();
-  }
-
-  function prevImage() {
-    if (!projectImages.length) return;
-    currentIndex = (currentIndex - 1 + projectImages.length) % projectImages.length;
-    updateLightboxImage();
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-  }
-
-  lightbox.addEventListener('click', function(e) {
-    if (e.target === this) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
-  });
-</script>
-
+      <div id="services"></div>
+      <div id="contact"></div>
+    </section>
+  </main>
 </body>
 </html>
