@@ -2,366 +2,157 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Wandrille – Portfolio Photo</title>
+  <title>Wandrille.fm</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      min-height: 100vh;
       background: #050505;
       color: #f5f5f5;
-      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 10vh 10vw; /* 10% tout autour de l'écran */
       display: flex;
+      align-items: stretch;
+      justify-content: center;
     }
 
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(220px, 320px) 1fr;
+    .grid {
       width: 100%;
-      min-height: 100vh;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 0.5rem; /* espace entre les cases, ajuste comme tu veux */
     }
 
-    /* COLONNE GAUCHE */
-
-    .left {
-      border-right: 1px solid rgba(255,255,255,0.08);
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .nav-vertical {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 2rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      opacity: 0.7;
-    }
-
-    .nav-vertical a {
-      color: inherit;
-      text-decoration: none;
+    .cell {
       position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #111; /* fallback si pas d'image */
+      cursor: pointer;
     }
-    .nav-vertical a::after {
-      content: "";
+
+    .cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%);
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+
+    .cell:hover img {
+      transform: scale(1.05);
+      filter: grayscale(30%);
+    }
+
+    .cell::after {
+      content: attr(data-title);
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -0.4rem;
-      width: 1px;
-      height: 10px;
-      background: transparent;
-      transition: background 0.2s;
-    }
-    .nav-vertical a:hover::after {
-      background: #ffffff;
-    }
-
-    .identity {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      max-width: 260px;
-    }
-
-    .identity-title {
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0.7;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
+      left: 0.7rem;
+      bottom: 0.6rem;
+      right: 0.7rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-    }
-
-    .role {
-      font-size: 0.85rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .intro {
-      font-size: 0.85rem;
-      line-height: 1.5;
+      color: #f5f5f5;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
       opacity: 0.9;
+      pointer-events: none;
     }
 
-    .tags {
-      font-size: 0.75rem;
-      opacity: 0.8;
-    }
-
-    .footer {
-      font-size: 0.7rem;
-      opacity: 0.6;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    /* COLONNE DROITE */
-
-    .right {
-      padding: 2rem;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .right-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      opacity: 0.7;
-    }
-
-    .carousel {
-      position: relative;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE */
-    }
-    .carousel::-webkit-scrollbar { display: none; }
-
-    .cards {
-      display: flex;
-      gap: 1.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, #333 0, #161616 40%, #050505 100%);
-      border-radius: 18px;
-      min-width: 260px;
-      max-width: 320px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
-    }
-
-    .card-image {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      filter: grayscale(100%);
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .card:hover .card-image {
-      filter: grayscale(30%);
-      transform: scale(1.03);
-    }
-
-    .card-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent 40%);
-    }
-
-    .card-body {
-      padding: 1rem 1.1rem 1.1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .card-title {
-      font-size: 0.95rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .card-meta {
-      font-size: 0.75rem;
-      opacity: 0.75;
-    }
-
-    .card-tagline {
-      font-size: 0.8rem;
-      opacity: 0.9;
-    }
-
-    .chip {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.16);
-      padding: 0.2rem 0.6rem;
-      align-self: flex-start;
-      opacity: 0.8;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 800px) {
-      body { display: block; }
-      .layout {
-        display: block;
+    @media (max-width: 768px) {
+      body {
+        padding: 8vh 5vw;
       }
-      .left {
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        flex-direction: row;
-        gap: 1.5rem;
-        align-items: center;
-      }
-      .nav-vertical {
-        writing-mode: horizontal-tb;
-        flex-direction: row;
-        justify-content: flex-start;
-      }
-      .identity {
-        max-width: 100%;
-      }
-      .right {
-        padding: 1.2rem 1rem 1.5rem;
-      }
-      .cards {
-        gap: 1rem;
-      }
-      .card {
-        min-width: 220px;
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat( (25 / 3), minmax(80px, 1fr) );
       }
     }
   </style>
 </head>
 <body>
-  <main class="layout">
-    <!-- COLONNE GAUCHE -->
-    <section class="left">
-      <div>
-        <nav class="nav-vertical">
-          <a href="#accueil">ACCUEIL</a>
-          <a href="#projets">PROJETS</a>
-          <a href="#services">SERVICES</a>
-          <a href="#contact">CONTACT</a>
-        </nav>
-
-        <div class="identity" id="accueil">
-          <div class="identity-title">Portfolio</div>
-          <h1>WANDRILLE · UI/UX DESIGN</h1>
-          <p class="role">UI designer & développeur front-end</p>
-          <p class="intro">
-            UI designer et développeur front-end basé à Chambéry, spécialisé dans les identités visuelles et portfolios pour créatifs.
-          </p>
-          <p class="intro">
-            Photographie, design d’interface et direction artistique minimaliste, avec un goût pour le noir & blanc et les compositions épurées.
-          </p>
-          <p class="tags">
-            Wandrille Fernex · Designer & intégrateur · Portfolios & identités · FR
-          </p>
-        </div>
-      </div>
-
-      <footer class="footer">
-        © 2026 Wandrille.fm
-      </footer>
-    </section>
-
-    <!-- COLONNE DROITE -->
-    <section class="right">
-      <header class="right-header">
-        <span id="projets">Sélection de projets</span>
-        <span>Scroll horizontal</span>
-      </header>
-
-      <div class="carousel">
-        <div class="cards">
-          <!-- Carl de la Chapelle -->
-          <article class="card">
-            <div class="card-image"
-                 style="background-image:url('https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=1200');">
-              <div class="card-gradient"></div>
-            </div>
-            <div class="card-body">
-              <div class="card-title">Carl de la Chapelle</div>
-              <div class="card-meta">Portrait · Direction artistique</div>
-              <p class="card-tagline">
-                Série de portraits noir & blanc, lumière naturelle et cadrages serrés pour un rendu éditorial.
-              </p>
-              <div class="chip">Portraits</div>
-            </div>
-          </article>
-
-          <!-- Tradiscout -->
-          <article class="card">
-            <div class="card-image"
-                 style="background-image:url('https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=1200');">
-              <div class="card-gradient"></div>
-            </div>
-            <div class="card-body">
-              <div class="card-title">Tradiscout</div>
-              <div class="card-meta">Reportage · Événement</div>
-              <p class="card-tagline">
-                Reportages terrain pour un mouvement scout, capturant les moments de vie, les rites et la transmission.
-              </p>
-              <div class="chip">Reportage</div>
-            </div>
-          </article>
-
-          <!-- SJMV -->
-          <article class="card">
-            <div class="card-image"
-                 style="background-image:url('https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=1200');">
-              <div class="card-gradient"></div>
-            </div>
-            <div class="card-body">
-              <div class="card-title">SJMV</div>
-              <div class="card-meta">Documentaire · Vie communautaire</div>
-              <p class="card-tagline">
-                Images discrètes et contemplatives, centrées sur les gestes, les espaces et les temps forts liturgiques.
-              </p>
-              <div class="chip">Documentaire</div>
-            </div>
-          </article>
-
-          <!-- Vianney photo -->
-          <article class="card">
-            <div class="card-image"
-                 style="background-image:url('https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=1200');">
-              <div class="card-gradient"></div>
-            </div>
-            <div class="card-body">
-              <div class="card-title">Vianney photo</div>
-              <div class="card-meta">UI/UX · Portfolio photo</div>
-              <p class="card-tagline">
-                Interface de portfolio pensée pour la lisibilité des séries et un parcours fluide entre les projets clients.
-              </p>
-              <div class="chip">Design & photo</div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <div id="services"></div>
-      <div id="contact"></div>
-    </section>
+  <main class="grid">
+    <!-- Remplace les src par tes vraies images -->
+    <div class="cell" data-title="Projet 1">
+      <img src="https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 1">
+    </div>
+    <div class="cell" data-title="Projet 2">
+      <img src="https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 2">
+    </div>
+    <div class="cell" data-title="Projet 3">
+      <img src="https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 3">
+    </div>
+    <div class="cell" data-title="Projet 4">
+      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 4">
+    </div>
+    <div class="cell" data-title="Projet 5">
+      <img src="https://images.pexels.com/photos/4664468/pexels-photo-4664468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 5">
+    </div>
+    <div class="cell" data-title="Projet 6">
+      <img src="https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 6">
+    </div>
+    <div class="cell" data-title="Projet 7">
+      <img src="https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 7">
+    </div>
+    <div class="cell" data-title="Projet 8">
+      <img src="https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 8">
+    </div>
+    <div class="cell" data-title="Projet 9">
+      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 9">
+    </div>
+    <div class="cell" data-title="Projet 10">
+      <img src="https://images.pexels.com/photos/4664468/pexels-photo-4664468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 10">
+    </div>
+    <div class="cell" data-title="Projet 11">
+      <img src="https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 11">
+    </div>
+    <div class="cell" data-title="Projet 12">
+      <img src="https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 12">
+    </div>
+    <div class="cell" data-title="Projet 13">
+      <img src="https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 13">
+    </div>
+    <div class="cell" data-title="Projet 14">
+      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 14">
+    </div>
+    <div class="cell" data-title="Projet 15">
+      <img src="https://images.pexels.com/photos/4664468/pexels-photo-4664468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 15">
+    </div>
+    <div class="cell" data-title="Projet 16">
+      <img src="https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 16">
+    </div>
+    <div class="cell" data-title="Projet 17">
+      <img src="https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 17">
+    </div>
+    <div class="cell" data-title="Projet 18">
+      <img src="https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 18">
+    </div>
+    <div class="cell" data-title="Projet 19">
+      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 19">
+    </div>
+    <div class="cell" data-title="Projet 20">
+      <img src="https://images.pexels.com/photos/4664468/pexels-photo-4664468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 20">
+    </div>
+    <div class="cell" data-title="Projet 21">
+      <img src="https://images.pexels.com/photos/167404/pexels-photo-167404.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 21">
+    </div>
+    <div class="cell" data-title="Projet 22">
+      <img src="https://images.pexels.com/photos/3803375/pexels-photo-3803375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 22">
+    </div>
+    <div class="cell" data-title="Projet 23">
+      <img src="https://images.pexels.com/photos/2826131/pexels-photo-2826131.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 23">
+    </div>
+    <div class="cell" data-title="Projet 24">
+      <img src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 24">
+    </div>
+    <div class="cell" data-title="Projet 25">
+      <img src="https://images.pexels.com/photos/4664468/pexels-photo-4664468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Projet 25">
+    </div>
   </main>
 </body>
 </html>
